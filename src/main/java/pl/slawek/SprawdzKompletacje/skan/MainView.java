@@ -4,6 +4,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
@@ -26,6 +27,7 @@ public class MainView extends VerticalLayout {
     private final TextField barcodeScanner = new TextField("Kod produktu");
     private final TextField quantityField = new TextField("Ilość pobranych sztuk");
     private final Button addButton = new Button("Zapisz");
+    private final Button reloadButton = new Button("Odśwież");
     private final Grid<Product> productsGrid = new Grid<>(Product.class);
     private File selectedFile;
     private List<Product> productList = new ArrayList<>();
@@ -57,7 +59,7 @@ public class MainView extends VerticalLayout {
 
                 optionalProduct.ifPresentOrElse(
                         product -> {
-                            Notification.show("Product found: " + product.getName());
+                            Notification.show("Znaleziono produkt: " + product.getName());
                             quantityField.setValue(String.valueOf(product.getQuantity() - product.getScannedQuantity()));
                             quantityField.setReadOnly(false);
                             productsGrid.select(product);
@@ -81,15 +83,23 @@ public class MainView extends VerticalLayout {
 
         });
 
-        productsGrid.addColumn(Product::getBarcode);//.setHeader("Kod produktu");
-        productsGrid.addColumn(Product::getName).setHeader("Nazwa produktu");
-        productsGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona");
-        productsGrid.addColumn(Product::getScannedQuantity).setHeader("Ilość zeskanowana");
-        productsGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        reloadButton.setEnabled(true);
+        reloadButton.addClickListener(event -> {
+            fileSelector.setItems(fileLister.getExcelFileNames());
+            clear();
+                });
+
+//        productsGrid.addColumn(Product::getBarcode);//.setHeader("Kod produktu");
+//        productsGrid.addColumn(Product::getName).setHeader("Nazwa produktu");
+//        productsGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona");
+//        productsGrid.addColumn(Product::getScannedQuantity).setHeader("Ilość zeskanowana");
+//        productsGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
     }
 
     private void buildLayout() {
-        add(fileSelector, barcodeScanner, quantityField, addButton, productsGrid);
+        HorizontalLayout hr = new HorizontalLayout();
+        hr.add(fileSelector, reloadButton, barcodeScanner, quantityField);
+        add(hr, addButton, productsGrid);
     }
 
     private void clear(){
