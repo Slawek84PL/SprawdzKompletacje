@@ -14,10 +14,9 @@ import pl.slawek.SprawdzKompletacje.file.FileLister;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Component
 @Route("/")
@@ -31,6 +30,7 @@ public class MainView extends VerticalLayout {
     private File selectedFile;
     private List<Product> productList = new ArrayList<>();
     private final FileLister fileLister = new FileLister();
+    private final ExcelReader excelReader = new ExcelReader();
 
     public MainView() {
         configureComponents();
@@ -42,7 +42,7 @@ public class MainView extends VerticalLayout {
         fileSelector.addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 selectedFile = new File(event.getValue());
-                productList = ExcelReader.readProductsFromExcel(selectedFile);
+                productList = excelReader.readProductsFromExcel(selectedFile);
                 productsGrid.setItems(productList);
                 clear();
             }
@@ -75,7 +75,7 @@ public class MainView extends VerticalLayout {
             Product product = productsGrid.getSelectedItems().iterator().next();
             product.setScannedQuantity(product.getScannedQuantity() + quantity);
             ExcelWriter.updateProduct(selectedFile, product);
-            productList = ExcelReader.readProductsFromExcel(selectedFile);
+            productList = excelReader.readProductsFromExcel(selectedFile);
             productsGrid.setItems(productList);
             clear();
 

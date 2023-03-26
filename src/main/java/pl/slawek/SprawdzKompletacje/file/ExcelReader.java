@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class ExcelReader {
 
-    public static List<Product> readProductsFromExcel(File filePath) {
+    public List<Product> readProductsFromExcel(File filePath) {
         List<Product> productList = new ArrayList<>();
 
         Workbook workbook;
