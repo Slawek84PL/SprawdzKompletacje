@@ -15,7 +15,7 @@ public class FileLister {
 
     private File directory = new File("C:\\Users\\slapy\\OneDrive\\Dokumenty\\Projekty\\SprawdzKompletacje\\");
 
-    private List<String> getExcelFileNames() {
+    public List<String> getExcelFileNames() {
         return Arrays.stream(Objects.requireNonNull(directory.listFiles()))
                 .filter(file -> file.getName().endsWith(".xlsx"))
                 .map(File::getName)
