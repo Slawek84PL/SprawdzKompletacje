@@ -40,7 +40,11 @@ public class ExcelReader {
 
                     switch (columnIndex) {
                         case 0:
-                            code = currentCell.getStringCellValue();
+                            if(currentCell.getCellType() == CellType.NUMERIC){
+                                code = String.valueOf((int) currentCell.getNumericCellValue());
+                            } else {
+                                code = currentCell.getStringCellValue();
+                            }
                             break;
                         case 1:
                             name = currentCell.getStringCellValue();
