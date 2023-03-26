@@ -10,6 +10,7 @@ import com.vaadin.flow.router.Route;
 import org.springframework.stereotype.Component;
 import pl.slawek.SprawdzKompletacje.file.ExcelReader;
 import pl.slawek.SprawdzKompletacje.file.ExcelWriter;
+import pl.slawek.SprawdzKompletacje.file.FileLister;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class MainView extends VerticalLayout {
     private final Grid<Product> productsGrid = new Grid<>(Product.class);
     private File selectedFile;
     private List<Product> productList = new ArrayList<>();
+    private final FileLister fileLister = new FileLister();
 
     public MainView() {
         configureComponents();
@@ -36,7 +38,7 @@ public class MainView extends VerticalLayout {
     }
 
     private void configureComponents() {
-        fileSelector.setItems(getExcelFileNames());
+        fileSelector.setItems(fileLister.getExcelFileNames());
         fileSelector.addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 selectedFile = new File(event.getValue());
@@ -97,11 +99,4 @@ public class MainView extends VerticalLayout {
         barcodeScanner.focus();
     }
 
-    private List<String> getExcelFileNames() {
-        File directory = new File("C:\\Users\\slapy\\OneDrive\\Dokumenty\\Projekty\\SprawdzKompletacje\\");
-        return Arrays.stream(directory.listFiles())
-                .filter(file -> file.getName().endsWith(".xlsx"))
-                .map(File::getName)
-                .collect(Collectors.toList());
-    }
 }
