@@ -4,13 +4,12 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.io.FilenameFilter;
 
 @Data
 @Component
 public class FileList {
 
-    private File[] fileList = new File[0];
+    private File[] fileList;
     private File filePath = new File("C:\\Users\\slapy\\OneDrive\\Dokumenty\\Projekty\\SprawdzKompletacje\\");
 
     public FileList() {
