@@ -20,26 +20,25 @@ public class ExcelWriter {
             while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
                 Cell barcodeCell = currentRow.getCell(0);
-                // if(barcodeCell.getCellType().equals(CellType.NUMERIC)){
-                //     if (String.valueOf((int) barcodeCell.getNumericCellValue()).equals(product.getBarcode())){
-                //         Cell scannedQuantity = currentRow.getCell(3);
-                //         scannedQuantity.setCellValue(product.getScannedQuantity());
-                //         break;
-                //     }
-                // } else {
-                //         if (barcodeCell.getStringCellValue().equals(product.getBarcode())) {
-                //             Cell scannedQuantity = currentRow.getCell(3);
-                //             scannedQuantity.setCellValue(product.getScannedQuantity());
-                //             break;
-                //         }
-                //     }
-
-                
-                if (String.valueOf((int) barcodeCell.getNumericCellValue()).equals(product.getBarcode()) || barcodeCell.getStringCellValue().equals(product.getBarcode()){
-                    Cell scannedQuantity = currentRow.getCell(3);
-                    scannedQuantity.setCellValue(product.getScannedQuantity());
-                    break;
-                }
+                 if(barcodeCell.getCellType().equals(CellType.NUMERIC)){
+                     if (String.valueOf((int) barcodeCell.getNumericCellValue()).equals(product.getBarcode())){
+                         Cell scannedQuantity = currentRow.getCell(3);
+                         scannedQuantity.setCellValue(product.getScannedQuantity());
+                         break;
+                     }
+                 } else {
+                         if (barcodeCell.getStringCellValue().equals(product.getBarcode())) {
+                             Cell scannedQuantity = currentRow.getCell(3);
+                             scannedQuantity.setCellValue(product.getScannedQuantity());
+                             break;
+                         }
+                     }
+//                if (barcodeCell.getStringCellValue().equals(product.getBarcode()) || String.valueOf((int) barcodeCell.getNumericCellValue()).equals(product.getBarcode())) {
+//                    Cell scannedQuantity = currentRow.getCell(3);
+//                    scannedQuantity.setCellValue(product.getScannedQuantity());
+//                    break;
+//                }
+            }
 
             inputStream.close();
             FileOutputStream outputStream = new FileOutputStream(file);
