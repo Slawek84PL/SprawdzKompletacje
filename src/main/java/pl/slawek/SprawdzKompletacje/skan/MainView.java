@@ -69,7 +69,7 @@ public class MainView extends VerticalLayout {
                             productsGrid.select(product);
                             addButton.setEnabled(true);
                         },
-                        () -> Notification.show("Product not found")
+                        () -> Notification.show("Nie znaleziono produktu")
                 );
             }
         });
@@ -92,6 +92,7 @@ public class MainView extends VerticalLayout {
             fileSelector.setItems(fileLister.getExcelFileNames());
             // TODO: 2023-03-26 czyszczenie grid 
             clear();
+            barcodeScanner.setReadOnly(true);
             fileSelector.focus();
                 });
 
@@ -122,6 +123,7 @@ public class MainView extends VerticalLayout {
     private void clear(){
         addButton.setEnabled(false);
         quantityField.setValue("");
+        quantityField.setReadOnly(true);
         barcodeScanner.setValue("");
         barcodeScanner.focus();
     }
