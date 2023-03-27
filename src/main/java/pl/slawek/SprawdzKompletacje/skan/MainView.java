@@ -12,6 +12,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import pl.slawek.SprawdzKompletacje.file.ExcelReader;
 import pl.slawek.SprawdzKompletacje.file.ExcelWriter;
 import pl.slawek.SprawdzKompletacje.file.FileLister;
@@ -22,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CssImport("./styles/my-grid-styles.css")
-@Component
+@Controller
 @Route("/")
 public class MainView extends VerticalLayout {
 
@@ -51,9 +52,11 @@ public class MainView extends VerticalLayout {
                 productList = excelReader.readProductsFromExcel(selectedFile);
                 productsGrid.setItems(productList);
                 clear();
+                barcodeScanner.setReadOnly(false);
             }
         });
 
+        barcodeScanner.setReadOnly(true);
         barcodeScanner.addValueChangeListener(event -> {
             String barcode = event.getValue();
             if (!barcode.isEmpty()) {
@@ -84,7 +87,6 @@ public class MainView extends VerticalLayout {
             productList = excelReader.readProductsFromExcel(selectedFile);
             productsGrid.setItems(productList);
             clear();
-
         });
 
         reloadButton.setEnabled(true);
