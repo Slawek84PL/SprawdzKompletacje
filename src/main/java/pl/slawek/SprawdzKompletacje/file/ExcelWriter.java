@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 @Component
 public class ExcelWriter {
-    public static void updateProduct(File file, Product product) {
+    public void updateProduct(File file, Product product) {
         try {
             FileInputStream inputStream = new FileInputStream(file);
             Workbook workbook = new XSSFWorkbook(inputStream);

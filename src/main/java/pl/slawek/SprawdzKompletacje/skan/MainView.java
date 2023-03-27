@@ -36,6 +36,7 @@ public class MainView extends VerticalLayout {
     private List<Product> productList = new ArrayList<>();
     private final FileLister fileLister = new FileLister();
     private final ExcelReader excelReader = new ExcelReader();
+    private final ExcelWriter excelWriter = new ExcelWriter();
 
     public MainView() {
         configureComponents();
@@ -79,7 +80,7 @@ public class MainView extends VerticalLayout {
             int quantity = Integer.parseInt(quantityField.getValue());
             Product product = productsGrid.getSelectedItems().iterator().next();
             product.setScannedQuantity(product.getScannedQuantity() + quantity);
-            ExcelWriter.updateProduct(selectedFile, product);
+            excelWriter.updateProduct(selectedFile, product);
             productList = excelReader.readProductsFromExcel(selectedFile);
             productsGrid.setItems(productList);
             clear();
