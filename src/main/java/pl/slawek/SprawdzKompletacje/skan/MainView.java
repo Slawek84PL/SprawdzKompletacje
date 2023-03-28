@@ -69,10 +69,12 @@ public class MainView extends VerticalLayout {
                             Notification.show("Znaleziono produkt: " + product.getName());
                             quantityField.setValue(String.valueOf(product.getQuantity() - product.getScannedQuantity()));
                             quantityField.setReadOnly(false);
+                            quantityField.focus();
                             productsGrid.select(product);
                             addButton.setEnabled(true);
                         },
                         () -> Notification.show("Nie znaleziono produktu")
+                        quantityField.setReadOnly(true);
                 );
             }
         });
