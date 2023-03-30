@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 @Component
 public class ExcelWriter {
-    public void updateProduct(File file, Product product) {
+    public void updateProduct(String file, Product product) {
         try {
             FileInputStream inputStream = new FileInputStream(file);
             Workbook workbook = new XSSFWorkbook(inputStream);
@@ -33,11 +33,6 @@ public class ExcelWriter {
                              break;
                          }
                      }
-//                if (barcodeCell.getStringCellValue().equals(product.getBarcode()) || String.valueOf((int) barcodeCell.getNumericCellValue()).equals(product.getBarcode())) {
-//                    Cell scannedQuantity = currentRow.getCell(3);
-//                    scannedQuantity.setCellValue(product.getScannedQuantity());
-//                    break;
-//                }
             }
 
             inputStream.close();

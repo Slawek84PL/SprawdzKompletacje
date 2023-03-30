@@ -11,6 +11,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import pl.slawek.SprawdzKompletacje.file.ExcelReader;
@@ -31,25 +32,26 @@ public class MainView extends VerticalLayout {
     private final TextField barcodeScanner = new TextField("Kod produktu");
     private final TextField quantityField = new TextField("Ilość pobranych sztuk");
     private final Button addButton = new Button("Zapisz");
-    private final Button reloadButton = new Button("Odśwież");
+    private final Button reloadButton = new Button("Załaduj zlecenia");
     private final Grid<Product> productsGrid = new Grid<>(Product.class, false);
     private File selectedFile;
     private List<Product> productList = new ArrayList<>();
-    private final FileLister fileLister = new FileLister();
+    private final FileLister fileLister;
     private final ExcelReader excelReader = new ExcelReader();
     private final ExcelWriter excelWriter = new ExcelWriter();
-
+    @Value("${file.path}")
+    private String filePath;
     public MainView() {
+        fileLister = new FileLister();
         configureComponents();
         buildLayout();
     }
 
     private void configureComponents() {
-        fileSelector.setItems(fileLister.getExcelFileNames());
         fileSelector.addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 selectedFile = new File(event.getValue());
-                productList = excelReader.readProductsFromExcel(selectedFile);
+                productList = excelReader.readProductsFromExcel(filePath + selectedFile);
                 productsGrid.setItems(productList);
                 clear();
                 barcodeScanner.setReadOnly(false);
@@ -74,7 +76,6 @@ public class MainView extends VerticalLayout {
                             addButton.setEnabled(true);
                         },
                         () -> Notification.show("Nie znaleziono produktu")
-                        quantityField.setReadOnly(true);
                 );
             }
         });
@@ -85,15 +86,15 @@ public class MainView extends VerticalLayout {
             int quantity = Integer.parseInt(quantityField.getValue());
             Product product = productsGrid.getSelectedItems().iterator().next();
             product.setScannedQuantity(product.getScannedQuantity() + quantity);
-            excelWriter.updateProduct(selectedFile, product);
-            productList = excelReader.readProductsFromExcel(selectedFile);
+            excelWriter.updateProduct(filePath + selectedFile, product);
+            productList = excelReader.readProductsFromExcel(filePath + selectedFile);
             productsGrid.setItems(productList);
             clear();
         });
 
         reloadButton.setEnabled(true);
         reloadButton.addClickListener(event -> {
-            fileSelector.setItems(fileLister.getExcelFileNames());
+            fileSelector.setItems(fileLister.getExcelFileNames(filePath));
             // TODO: 2023-03-26 czyszczenie grid 
             clear();
             barcodeScanner.setReadOnly(true);
@@ -118,10 +119,8 @@ public class MainView extends VerticalLayout {
 
     private void buildLayout() {
         HorizontalLayout hr = new HorizontalLayout();
-        Div div = new Div();
-        div.add(fileSelector, reloadButton);
-        hr.add(div, barcodeScanner, quantityField);
-        add(hr, addButton, productsGrid);
+        hr.add(fileSelector, barcodeScanner, quantityField);
+        add(reloadButton, hr, addButton, productsGrid);
     }
 
     private void clear(){
