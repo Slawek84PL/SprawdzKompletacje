@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Optional;
 
 @CssImport("./styles/my-grid-styles.css")
-@Controller
 @Route("/")
 public class MainView extends VerticalLayout {
 
@@ -48,6 +47,7 @@ public class MainView extends VerticalLayout {
     }
 
     private void configureComponents() {
+        fileSelector.setReadOnly(true);
         fileSelector.addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 selectedFile = new File(event.getValue());
@@ -95,6 +95,7 @@ public class MainView extends VerticalLayout {
         reloadButton.setEnabled(true);
         reloadButton.addClickListener(event -> {
             fileSelector.setItems(fileLister.getExcelFileNames(filePath));
+            fileSelector.setReadOnly(false);
             // TODO: 2023-03-26 czyszczenie grid 
             clear();
             barcodeScanner.setReadOnly(true);

@@ -3,4 +3,4 @@ file:
 
 spring:
   devtools:
-    add-properties: true
+    add-properties: false
