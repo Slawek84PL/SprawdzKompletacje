@@ -1,9 +1,13 @@
 file:
   path: C:\\Users\\slapy\\OneDrive\\Dokumenty\\Projekty\\SprawdzKompletacje\\pliki\\
+
 server:
   port : 8081
+
 spring:
   devtools:
     add-properties: true
-vaadin:
-  productionMode: false
+
+logging:
+  level:
+    web: DEBUG

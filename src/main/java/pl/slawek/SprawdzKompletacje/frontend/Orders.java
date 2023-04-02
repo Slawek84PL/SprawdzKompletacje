@@ -7,6 +7,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +27,7 @@ public class Orders extends VerticalLayout {
 
     private final ComboBox<String> fileSelector = new ComboBox<>("Wybierz zlecenie");
     private final TextField barcodeScanner = new TextField("Kod produktu");
-    private final TextField quantityField = new TextField("Ilość pobranych sztuk");
+    private final IntegerField quantityField = new IntegerField("Ilość pobranych sztuk");
     private final Button addButton = new Button("Zapisz");
     private final Button reloadButton = new Button("Załaduj zlecenia");
     private final Grid<Product> productsGrid = new Grid<>(Product.class, false);
@@ -66,11 +67,10 @@ public class Orders extends VerticalLayout {
                 optionalProduct.ifPresentOrElse(
                         product -> {
                             Notification.show("Znaleziono produkt: " + product.getName());
-                            quantityField.setValue(String.valueOf(product.getQuantity() - product.getScannedQuantity()));
+                            quantityField.setValue(product.getQuantity() - product.getScannedQuantity());
                             quantityField.setReadOnly(false);
                             quantityField.focus();
                             productsGrid.select(product);
-                            addButton.setEnabled(true);
                         },
                         () -> Notification.show("Nie znaleziono produktu")
                 );
@@ -78,9 +78,19 @@ public class Orders extends VerticalLayout {
         });
 
         quantityField.setReadOnly(true);
+        quantityField.addValueChangeListener(event -> {
+            if (quantityField.isEmpty() || quantityField.getValue() == 0){
+                addButton.setEnabled(false);
+
+            } else {
+                addButton.setEnabled(true);
+                addButton.focus();
+            }
+        });
+
         addButton.setEnabled(false);
         addButton.addClickListener(event -> {
-            int quantity = Integer.parseInt(quantityField.getValue());
+            int quantity = quantityField.getValue();
             Product product = productsGrid.getSelectedItems().iterator().next();
             product.setScannedQuantity(product.getScannedQuantity() + quantity);
             excelWriter.updateProduct(filePath + selectedFile, product);
@@ -104,6 +114,7 @@ public class Orders extends VerticalLayout {
         productsGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona").setAutoWidth(true);
         productsGrid.addColumn(Product::getScannedQuantity).setHeader("Ilość zeskanowana").setAutoWidth(true);
         productsGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        productsGrid.setEnabled(false);
         productsGrid.setPartNameGenerator(product -> {
             if(product.getQuantity() == product.getScannedQuantity()){
                 return "green-background ";
@@ -123,7 +134,7 @@ public class Orders extends VerticalLayout {
 
     private void clear(){
         addButton.setEnabled(false);
-        quantityField.setValue("");
+        quantityField.setValue(0);
         quantityField.setReadOnly(true);
         barcodeScanner.setValue("");
         barcodeScanner.focus();
