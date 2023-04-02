@@ -1,22 +1,19 @@
-package pl.slawek.SprawdzKompletacje.skan;
+package pl.slawek.SprawdzKompletacje.frontend;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import pl.slawek.SprawdzKompletacje.file.ExcelReader;
 import pl.slawek.SprawdzKompletacje.file.ExcelWriter;
 import pl.slawek.SprawdzKompletacje.file.FileLister;
+import pl.slawek.SprawdzKompletacje.skan.Product;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,8 +21,8 @@ import java.util.List;
 import java.util.Optional;
 
 @CssImport("./styles/my-grid-styles.css")
-@Route("/")
-public class MainView extends VerticalLayout {
+@Route("/zlecenia")
+public class Orders extends VerticalLayout {
 
     private final ComboBox<String> fileSelector = new ComboBox<>("Wybierz zlecenie");
     private final TextField barcodeScanner = new TextField("Kod produktu");
@@ -40,7 +37,7 @@ public class MainView extends VerticalLayout {
     private final ExcelWriter excelWriter = new ExcelWriter();
     @Value("${file.path}")
     private String filePath;
-    public MainView() {
+    public Orders() {
         fileLister = new FileLister();
         configureComponents();
         buildLayout();
@@ -119,9 +116,9 @@ public class MainView extends VerticalLayout {
     }
 
     private void buildLayout() {
-        HorizontalLayout hr = new HorizontalLayout();
-        hr.add(fileSelector, barcodeScanner, quantityField);
-        add(reloadButton, hr, addButton, productsGrid);
+        Div div = new Div();
+        div.add(fileSelector, barcodeScanner, quantityField);
+        add(reloadButton, div, addButton, productsGrid);
     }
 
     private void clear(){

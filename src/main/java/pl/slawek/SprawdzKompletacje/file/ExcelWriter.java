@@ -11,8 +11,8 @@ import java.util.Iterator;
 @Component
 public class ExcelWriter {
     public void updateProduct(String file, Product product) {
-        try {
-            FileInputStream inputStream = new FileInputStream(file);
+        try (FileInputStream inputStream = new FileInputStream(file)) {
+
             Workbook workbook = new XSSFWorkbook(inputStream);
             Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = sheet.iterator();
@@ -35,7 +35,6 @@ public class ExcelWriter {
                      }
             }
 
-            inputStream.close();
             FileOutputStream outputStream = new FileOutputStream(file);
             workbook.write(outputStream);
             workbook.close();
