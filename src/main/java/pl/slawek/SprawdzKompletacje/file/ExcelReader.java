@@ -5,7 +5,6 @@ import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 import pl.slawek.SprawdzKompletacje.skan.Product;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,7 +62,7 @@ public class ExcelReader {
                 productList.add(product);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         return productList;
