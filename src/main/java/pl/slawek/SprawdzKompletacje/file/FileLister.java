@@ -1,9 +1,7 @@
 package pl.slawek.SprawdzKompletacje.file;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.Arrays;
@@ -12,7 +10,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Data
-@Component
+@Service
 public class FileLister {
 
     public List<String> getExcelFileNames(String filePath) {

@@ -2,13 +2,13 @@ package pl.slawek.SprawdzKompletacje.file;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.slawek.SprawdzKompletacje.skan.Product;
 
 import java.io.*;
 import java.util.Iterator;
 
-@Component
+@Service
 public class ExcelWriter {
     public void updateProduct(String file, Product product) {
         try (FileInputStream inputStream = new FileInputStream(file)) {

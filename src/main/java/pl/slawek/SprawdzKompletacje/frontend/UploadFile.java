@@ -5,10 +5,11 @@ import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.FileBuffer;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import pl.slawek.SprawdzKompletacje.file.UploadFileService;
 
 import java.io.InputStream;
-
+@Component
 @Route(value = "Upload", layout = MainView.class)
 class UploadFile extends VerticalLayout {
 

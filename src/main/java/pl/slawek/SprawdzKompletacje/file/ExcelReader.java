@@ -2,7 +2,7 @@ package pl.slawek.SprawdzKompletacje.file;
 
 import lombok.Data;
 import org.apache.poi.ss.usermodel.*;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.slawek.SprawdzKompletacje.skan.Product;
 
 import java.io.FileInputStream;
@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Data
-@Component
+@Service
 public class ExcelReader {
 
     public List<Product> readProductsFromExcel(String filePath) {
