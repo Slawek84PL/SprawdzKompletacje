@@ -8,6 +8,6 @@ spring:
   devtools:
     add-properties: true
 
-logging:
-  level:
-    web: DEBUG
+#logging:
+#  level:
+#    web: DEBUG
