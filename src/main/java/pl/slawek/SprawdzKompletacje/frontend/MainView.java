@@ -40,8 +40,8 @@ class MainView extends AppLayout {
     private Tabs getTabs() {
         Tabs tabs = new Tabs();
         tabs.add(createTab(VaadinIcon.HOME, "Strona Główna", HomeView.class),
-                createTab(VaadinIcon.CART, " Zamówienia", Orders.class));
-//                createTab(VaadinIcon.USER_HEART, "Customers"),
+                createTab(VaadinIcon.CART, " Zamówienia", Orders.class),
+                createTab(VaadinIcon.USER_HEART, "Customers", UploadFile.class));
 //                createTab(VaadinIcon.PACKAGE, "Products"),
 //                createTab(VaadinIcon.RECORDS, "Documents"),
 //                createTab(VaadinIcon.LIST, "Tasks"),
