@@ -1,20 +1,20 @@
 package pl.slawek.SprawdzKompletacje.file;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 
 @Service
-class UploadFIleService {
+public class UploadFileService {
 
-    @Value("${file.path}")
-    private String destinationPath;
 
-    public void copyFile(String uploadingFile){
-        File copied = new File(uploadingFile);
-        try (InputStream in = new BufferedInputStream(new FileInputStream(uploadingFile));
-             OutputStream out = new BufferedOutputStream(new FileOutputStream(destinationPath + copied.getName()))) {
+
+    public UploadFileService() {
+    }
+
+    public void copyFile(String uploadingFile, InputStream in, String destinationPath){
+//        File copied = new File(uploadingFile);
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(destinationPath + uploadingFile))) {
             byte[] buffer = new byte[1024];
             int lengthRead;
             while ((lengthRead = in.read(buffer)) > 0) {
