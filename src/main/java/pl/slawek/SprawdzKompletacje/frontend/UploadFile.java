@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import pl.slawek.SprawdzKompletacje.file.UploadFileService;
 
 import java.io.InputStream;
-@Component
+
 @Route(value = "Upload", layout = MainView.class)
 class UploadFile extends VerticalLayout {
 

@@ -8,5 +8,5 @@ spring:
   devtools:
     add-properties: false
 
-vaadin:
-  productionMode: true
+#vaadin:
+#  productionMode: true

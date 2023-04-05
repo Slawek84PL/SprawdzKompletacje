@@ -22,7 +22,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-@Component
 @CssImport("./styles/my-grid-styles.css")
 @Route(value = "Zamówienia", layout = MainView.class)
 @PageTitle("Zamówienia")
