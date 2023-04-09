@@ -13,12 +13,13 @@ import java.io.InputStream;
 @Route(value = "Upload", layout = MainView.class)
 class UploadFile extends VerticalLayout {
 
-    @Value("${file.path}")
-    private String destinationPath;
+
+    private final String destinationPath;
     private final FileBuffer buffer = new FileBuffer();
     private final UploadFileService uploadFileService = new UploadFileService();
 
-    public UploadFile() {
+    public UploadFile(@Value("${file.path}") String destinationPath) {
+        this.destinationPath = destinationPath;
         createUpload();
     }
 

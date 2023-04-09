@@ -38,10 +38,10 @@ public class Orders extends VerticalLayout {
     private final FileLister fileLister;
     private final ExcelReader excelReader = new ExcelReader();
     private final ExcelWriter excelWriter = new ExcelWriter();
-    @Value("${file.path}")
-    private String filePath;
-    public Orders() {
+    private final String filePath;
+    public Orders(@Value("${file.path}") String filePath) {
         fileLister = new FileLister();
+        this.filePath = filePath;
         configureComponents();
         buildLayout();
     }

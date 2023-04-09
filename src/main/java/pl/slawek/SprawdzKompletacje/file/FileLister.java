@@ -1,6 +1,7 @@
 package pl.slawek.SprawdzKompletacje.file;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
