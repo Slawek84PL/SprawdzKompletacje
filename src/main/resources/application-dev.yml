@@ -1,5 +1,6 @@
 file:
   path: C:\\Users\\slapy\\OneDrive\\Dokumenty\\Projekty\\SprawdzKompletacje\\pliki\\
+  finishedFilePath: finished\\
 
 server:
   port : 8081
