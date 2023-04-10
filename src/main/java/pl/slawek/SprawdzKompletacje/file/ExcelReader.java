@@ -3,6 +3,7 @@ package pl.slawek.SprawdzKompletacje.file;
 import lombok.Data;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Service;
+import pl.slawek.SprawdzKompletacje.file.config.FileConfig;
 import pl.slawek.SprawdzKompletacje.skan.Product;
 
 import java.io.FileInputStream;
@@ -15,11 +16,17 @@ import java.util.List;
 @Service
 public class ExcelReader {
 
-    public List<Product> readProductsFromExcel(String filePath) {
+    private final FileConfig fileConfig;
+
+    public ExcelReader(final FileConfig fileConfig) {
+        this.fileConfig = fileConfig;
+    }
+
+    public List<Product> readProductsFromExcel(String selectedFile) {
         List<Product> productList = new ArrayList<>();
 
         Workbook workbook;
-        try (FileInputStream inputStream = new FileInputStream(filePath)) {
+        try (FileInputStream inputStream = new FileInputStream(fileConfig.getPath() + selectedFile)) {
             workbook = WorkbookFactory.create(inputStream);
             Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();

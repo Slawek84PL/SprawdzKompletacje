@@ -2,6 +2,7 @@ package pl.slawek.SprawdzKompletacje.file;
 
 import lombok.Data;
 import org.springframework.stereotype.Service;
+import pl.slawek.SprawdzKompletacje.file.config.FileConfig;
 
 import java.io.*;
 
@@ -10,13 +11,12 @@ import java.io.*;
 class DeleteFileService {
 
     private final CopyFileService copyFileService;
-
-    private String finishedFilePath = "ukończone\\";
+    private final FileConfig fileConfig;
 
     public void finishFile(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         try (InputStream inputStream = new FileInputStream(file)) {
-            copyFileService.copyFile(file.getName(), inputStream, finishedFilePath);
+            copyFileService.copyFile(file.getName(), inputStream, fileConfig.getFinishedFilePath());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

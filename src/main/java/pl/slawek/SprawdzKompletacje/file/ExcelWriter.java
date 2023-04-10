@@ -3,6 +3,7 @@ package pl.slawek.SprawdzKompletacje.file;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
+import pl.slawek.SprawdzKompletacje.file.config.FileConfig;
 import pl.slawek.SprawdzKompletacje.skan.Product;
 
 import java.io.*;
@@ -10,6 +11,13 @@ import java.util.Iterator;
 
 @Service
 public class ExcelWriter {
+
+    private final FileConfig fileConfig;
+
+    public ExcelWriter(final FileConfig fileConfig) {
+        this.fileConfig = fileConfig;
+    }
+
     public void updateProduct(String file, Product product) {
         try (FileInputStream inputStream = new FileInputStream(file)) {
 

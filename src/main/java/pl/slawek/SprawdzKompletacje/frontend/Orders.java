@@ -11,14 +11,11 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import pl.slawek.SprawdzKompletacje.file.ExcelReader;
 import pl.slawek.SprawdzKompletacje.file.ExcelWriter;
 import pl.slawek.SprawdzKompletacje.file.FileLister;
 import pl.slawek.SprawdzKompletacje.skan.Product;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,15 +30,16 @@ public class Orders extends VerticalLayout {
     private final Button addButton = new Button("Zapisz");
     private final Button reloadButton = new Button("Załaduj zlecenia");
     private final Grid<Product> productsGrid = new Grid<>(Product.class, false);
-    private File selectedFile;
+    private String selectedFile;
     private List<Product> productList = new ArrayList<>();
     private final FileLister fileLister;
-    private final ExcelReader excelReader = new ExcelReader();
-    private final ExcelWriter excelWriter = new ExcelWriter();
-    private final String filePath;
-    public Orders(@Value("${file.path}") String filePath) {
-        fileLister = new FileLister();
-        this.filePath = filePath;
+    private final ExcelReader excelReader;
+    private final ExcelWriter excelWriter;
+
+    public Orders(final FileLister fileLister, final ExcelReader excelReader, final ExcelWriter excelWriter) {
+        this.fileLister = fileLister;
+        this.excelReader = excelReader;
+        this.excelWriter = excelWriter;
         configureComponents();
         buildLayout();
     }
@@ -50,8 +48,8 @@ public class Orders extends VerticalLayout {
         fileSelector.setReadOnly(true);
         fileSelector.addValueChangeListener(event -> {
             if (event.getValue() != null) {
-                selectedFile = new File(event.getValue());
-                productList = excelReader.readProductsFromExcel(filePath + selectedFile);
+                selectedFile = event.getValue();
+                productList = excelReader.readProductsFromExcel(selectedFile);
                 productsGrid.setItems(productList);
                 clear();
                 barcodeScanner.setReadOnly(false);
@@ -95,15 +93,15 @@ public class Orders extends VerticalLayout {
             int quantity = quantityField.getValue();
             Product product = productsGrid.getSelectedItems().iterator().next();
             product.setScannedQuantity(product.getScannedQuantity() + quantity);
-            excelWriter.updateProduct(filePath + selectedFile, product);
-            productList = excelReader.readProductsFromExcel(filePath + selectedFile);
+            excelWriter.updateProduct(selectedFile, product);
+            productList = excelReader.readProductsFromExcel(selectedFile);
             productsGrid.setItems(productList);
             clear();
         });
 
         reloadButton.setEnabled(true);
         reloadButton.addClickListener(event -> {
-            fileSelector.setItems(fileLister.getExcelFileNames(filePath));
+            fileSelector.setItems(fileLister.getExcelFileNames());
             fileSelector.setReadOnly(false);
             // TODO: 2023-03-26 czyszczenie grid 
             clear();
