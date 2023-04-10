@@ -4,22 +4,18 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.FileBuffer;
 import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import pl.slawek.SprawdzKompletacje.file.UploadFileService;
+import pl.slawek.SprawdzKompletacje.file.CopyFileService;
+import pl.slawek.SprawdzKompletacje.file.config.FileConfig;
 
 import java.io.InputStream;
 
 @Route(value = "Upload", layout = MainView.class)
 class UploadFile extends VerticalLayout {
 
-
-    private final String destinationPath;
     private final FileBuffer buffer = new FileBuffer();
-    private final UploadFileService uploadFileService = new UploadFileService();
-
-    public UploadFile(@Value("${file.path}") String destinationPath) {
-        this.destinationPath = destinationPath;
+    private final CopyFileService copyFileService;
+    public UploadFile(final FileConfig fileConfig) {
+        this.copyFileService = new CopyFileService(fileConfig);
         createUpload();
     }
 
@@ -32,7 +28,7 @@ class UploadFile extends VerticalLayout {
         upload.addSucceededListener(event -> {
 
             InputStream inputStream = buffer.getInputStream();
-            uploadFileService.copyFile(buffer.getFileName(), inputStream, destinationPath);
+            copyFileService.copyFile(buffer.getFileName(), inputStream);
         });
 
         add(upload);
