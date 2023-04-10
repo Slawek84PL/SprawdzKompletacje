@@ -5,10 +5,8 @@ import pl.slawek.SprawdzKompletacje.skan.Product;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ExcelWriterTest {
-    ExcelWriter excelWriter = new ExcelWriter();
+    ExcelWriter excelWriter;
     @Test
     void shouldWriteProductToExcelFile() throws IOException {
         String file = "C:\\Users\\slapy\\OneDrive\\Dokumenty\\Projekty\\SprawdzKompletacje\\pliki\\zlecenie 12.xlsx";
