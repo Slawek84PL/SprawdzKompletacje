@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix="file")
 public
-class FileConfig {
+class PathFileConfig {
     private String path = "";
     private String finishedFilePath = "";
 }
