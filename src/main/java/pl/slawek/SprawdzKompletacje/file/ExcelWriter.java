@@ -3,19 +3,21 @@ package pl.slawek.SprawdzKompletacje.file;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
-import pl.slawek.SprawdzKompletacje.file.config.FileConfig;
+import pl.slawek.SprawdzKompletacje.file.config.PathFileConfig;
 import pl.slawek.SprawdzKompletacje.skan.Product;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
 
 @Service
 public class ExcelWriter {
 
-    private final FileConfig fileConfig;
+    private final PathFileConfig pathFileConfig;
 
-    public ExcelWriter(final FileConfig fileConfig) {
-        this.fileConfig = fileConfig;
+    public ExcelWriter(final PathFileConfig pathFileConfig) {
+        this.pathFileConfig = pathFileConfig;
     }
 
     public void updateProduct(String file, Product product) {

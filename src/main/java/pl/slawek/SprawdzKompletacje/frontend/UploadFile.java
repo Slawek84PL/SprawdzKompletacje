@@ -5,7 +5,7 @@ import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.FileBuffer;
 import com.vaadin.flow.router.Route;
 import pl.slawek.SprawdzKompletacje.file.CopyFileService;
-import pl.slawek.SprawdzKompletacje.file.config.FileConfig;
+import pl.slawek.SprawdzKompletacje.file.config.PathFileConfig;
 
 import java.io.InputStream;
 
@@ -14,8 +14,8 @@ class UploadFile extends VerticalLayout {
 
     private final FileBuffer buffer = new FileBuffer();
     private final CopyFileService copyFileService;
-    public UploadFile(final FileConfig fileConfig) {
-        this.copyFileService = new CopyFileService(fileConfig);
+    public UploadFile(final PathFileConfig pathFileConfig) {
+        this.copyFileService = new CopyFileService(pathFileConfig);
         createUpload();
     }
 
