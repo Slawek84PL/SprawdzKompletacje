@@ -21,7 +21,7 @@ public class ExcelWriter {
     }
 
     public void updateProduct(String file, Product product) {
-        try (FileInputStream inputStream = new FileInputStream(file)) {
+        try (FileInputStream inputStream = new FileInputStream(pathFileConfig.getPath() + file)) {
 
             Workbook workbook = new XSSFWorkbook(inputStream);
             Sheet sheet = workbook.getSheetAt(0);
@@ -45,7 +45,7 @@ public class ExcelWriter {
                      }
             }
 
-            FileOutputStream outputStream = new FileOutputStream(file);
+            FileOutputStream outputStream = new FileOutputStream(pathFileConfig.getPath() + file);
             workbook.write(outputStream);
             workbook.close();
             outputStream.close();
