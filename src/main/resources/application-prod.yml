@@ -1,5 +1,6 @@
 file:
   path: /app/pliki/
+  finishedFilePath: finished/
 
 server:
   port : 8081
