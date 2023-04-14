@@ -1,19 +1,24 @@
 package pl.slawek.SprawdzKompletacje.frontend;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import pl.slawek.SprawdzKompletacje.file.FinishFileService;
 import pl.slawek.SprawdzKompletacje.file.ExcelReader;
 import pl.slawek.SprawdzKompletacje.file.ExcelWriter;
 import pl.slawek.SprawdzKompletacje.file.FileLister;
+
 import pl.slawek.SprawdzKompletacje.skan.Product;
 
 import java.util.ArrayList;
@@ -29,14 +34,21 @@ public class Orders extends VerticalLayout {
     private final IntegerField quantityField = new IntegerField("Ilość pobranych sztuk");
     private final Button addButton = new Button("Zapisz");
     private final Button reloadButton = new Button("Załaduj zlecenia");
+    private final Span status;
+    private final Button finishFile = new Button("Zakończ kompletacje");
+    private final Div finishDiv = new Div();
+    private final Button finishFileButton = new Button("Zakończ");
     private final Grid<Product> productsGrid = new Grid<>(Product.class, false);
     private String selectedFile;
     private List<Product> productList = new ArrayList<>();
     private final FileLister fileLister;
     private final ExcelReader excelReader;
     private final ExcelWriter excelWriter;
+    private final FinishFileService finishFileService;
 
-    public Orders(final FileLister fileLister, final ExcelReader excelReader, final ExcelWriter excelWriter) {
+    public Orders(final FileLister fileLister, final ExcelReader excelReader, final ExcelWriter excelWriter, final FinishFileService finishFileService) {
+        this.finishFileService = finishFileService;
+        status = new Span();
         this.fileLister = fileLister;
         this.excelReader = excelReader;
         this.excelWriter = excelWriter;
@@ -53,6 +65,7 @@ public class Orders extends VerticalLayout {
                 productsGrid.setItems(productList);
                 clear();
                 barcodeScanner.setReadOnly(false);
+                finishFile.setEnabled(true);
             }
         });
 
@@ -75,6 +88,22 @@ public class Orders extends VerticalLayout {
                         () -> Notification.show("Nie znaleziono produktu")
                 );
             }
+        });
+        finishFile.setEnabled(false);
+        finishFile.addClickListener(event -> {
+            finishDiv.setVisible(true);
+            status.setText("Operacja jest nieodwracalna. Czy na pewno chcesz zakończyć sprawdzanie?");
+        });
+
+        finishFileButton.setEnabled(true);
+        finishFileButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        finishFileButton.addClickListener(event -> {
+            finishFileService.moveAndRenameFile(fileSelector.getValue());
+            finishDiv.setVisible(false);
+            clear();
+            fileSelector.setReadOnly(true);
+            fileSelector.clear();
+            barcodeScanner.setReadOnly(true);
         });
 
         quantityField.setReadOnly(true);
@@ -128,8 +157,12 @@ public class Orders extends VerticalLayout {
 
     private void buildLayout() {
         Div div = new Div();
+        HorizontalLayout hr = new HorizontalLayout();
+        hr.add(reloadButton,finishFile, finishDiv);
+        finishDiv.add(status, finishFileButton);
+        finishDiv.setVisible(false);
         div.add(fileSelector, barcodeScanner, quantityField);
-        add(reloadButton, div, addButton, productsGrid);
+        add(hr, div, addButton, productsGrid);
     }
 
     private void clear(){
