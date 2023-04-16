@@ -9,7 +9,7 @@ import com.vaadin.flow.router.Route;
 import org.springframework.stereotype.Component;
 
 
-@Route(value = "/", layout = MainView.class)
+@Route(value = "", layout = MainView.class)
 @PageTitle("Strona domowa!")
 class HomeView extends VerticalLayout {
 

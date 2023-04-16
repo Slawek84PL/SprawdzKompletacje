@@ -4,9 +4,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-src/main/dev-bundle
-pliki
-frontend/generated/
+
 
 ### STS ###
 .apt_generated
