@@ -11,5 +11,7 @@ COPY pliki pliki
 CMD ./mvn dependency:resolve
 
 COPY src ./src
+COPY target ./target
 
 CMD ["./mvnw", "spring-boot:run", "-Pproduction"]
+RUN ["java -jar SprawdzKompletacje-0.0.1-SNAPSHOT.jar"]
