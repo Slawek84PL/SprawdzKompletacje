@@ -12,4 +12,4 @@ CMD ./mvn dependency:resolve
 
 COPY src ./src
 
-CMD ["./mvnw", "spring-boot:run", "-Pproduction"]
+RUN ["./mvnw", "spring-boot:run", "-Pproduction"]
