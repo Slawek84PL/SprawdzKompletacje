@@ -5,9 +5,9 @@ file:
 #server:
 #  port : 8082
 
-spring:
-  devtools:
-    add-properties: false
+#spring:
+#  devtools:
+#    add-properties: false
 
 #vaadin:
 #  productionMode: true
