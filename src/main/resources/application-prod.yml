@@ -3,7 +3,7 @@ file:
   finishedFilePath: finished/
 
 server:
-  port: 0
+  port: $PORT
 
 #spring:
 #  devtools:
