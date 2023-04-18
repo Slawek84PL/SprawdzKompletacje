@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje.frontend;
+package pl.slawek.SprawdzKompletacje.front;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
