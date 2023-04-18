@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/SprawdzKompletacje-0.0.1-SNAPSHOT.jar
+web: java -jar target/SprawdzKompletacje-0.0.1-SNAPSHOT.jar --server.port=$PORT
