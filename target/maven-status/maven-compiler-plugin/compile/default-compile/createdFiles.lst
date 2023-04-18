@@ -1,0 +1,12 @@
+pl\slawek\SprawdzKompletacje\file\config\PathFileConfig.class
+pl\slawek\SprawdzKompletacje\file\ExcelReader.class
+pl\slawek\SprawdzKompletacje\file\FinishFileService.class
+pl\slawek\SprawdzKompletacje\frontend\MainView.class
+pl\slawek\SprawdzKompletacje\frontend\UploadFile.class
+pl\slawek\SprawdzKompletacje\frontend\HomeView.class
+pl\slawek\SprawdzKompletacje\frontend\Orders.class
+pl\slawek\SprawdzKompletacje\skan\Product.class
+pl\slawek\SprawdzKompletacje\file\ExcelWriter.class
+pl\slawek\SprawdzKompletacje\file\FileLister.class
+pl\slawek\SprawdzKompletacje\SprawdzKompletacjeApplication.class
+pl\slawek\SprawdzKompletacje\file\CopyFileService.class

@@ -1,0 +1,18 @@
+{
+  "frontendFolder": "C:/Users/slapy/OneDrive/Dokumenty/Projekty/SprawdzKompletacje/frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "C:/Users/slapy/OneDrive/Dokumenty/Projekty/SprawdzKompletacje/frontend/generated/jar-resources",
+  "staticOutput": "C:/Users/slapy/OneDrive/Dokumenty/Projekty/SprawdzKompletacje/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "statsOutput": "C:\\Users\\slapy\\OneDrive\\Dokumenty\\Projekty\\SprawdzKompletacje\\target\\classes\\META-INF\\VAADIN\\config",
+  "frontendBundleOutput": "C:\\Users\\slapy\\OneDrive\\Dokumenty\\Projekty\\SprawdzKompletacje\\target\\classes\\META-INF\\VAADIN\\webapp",
+  "devBundleOutput": "C:/Users/slapy/OneDrive/Dokumenty/Projekty/SprawdzKompletacje/src/main/dev-bundle/webapp",
+  "devBundleStatsOutput": "C:/Users/slapy/OneDrive/Dokumenty/Projekty/SprawdzKompletacje/src/main/dev-bundle/config",
+  "jarResourcesFolder": "C:/Users/slapy/OneDrive/Dokumenty/Projekty/SprawdzKompletacje/frontend/generated/jar-resources",
+  "generatedFlowImportsFolder": "target/frontend",
+  "themeName": "",
+  "clientServiceWorkerSource": "C:\\Users\\slapy\\OneDrive\\Dokumenty\\Projekty\\SprawdzKompletacje\\target\\sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}
