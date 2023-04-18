@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* pl.slawek.SprawdzKompletacje
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* pl.slawek.SprawdzKompletacjeApplication --server.port=$PORT
