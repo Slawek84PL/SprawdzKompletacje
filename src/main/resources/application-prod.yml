@@ -2,8 +2,8 @@ file:
   path: /app/pliki/
   finishedFilePath: finished/
 
-server:
-  port: $PORT
+#server:
+#  port: $PORT
 
 #spring:
 #  devtools:
