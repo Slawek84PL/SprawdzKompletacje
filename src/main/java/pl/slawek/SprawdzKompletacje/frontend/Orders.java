@@ -33,7 +33,7 @@ public class Orders extends VerticalLayout {
     private final TextField barcodeScanner = new TextField("Kod produktu");
     private final IntegerField quantityField = new IntegerField("Ilość pobranych sztuk");
     private final Button addButton = new Button("Zapisz");
-    private final Button reloadButton = new Button("Załaduj zlecenia");
+    private final Button reloadButton = new Button("Załaduj Zlecenia");
     private final Span status;
     private final Button finishFile = new Button("Zakończ kompletacje");
     private final Div finishDiv = new Div();
