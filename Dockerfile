@@ -12,5 +12,5 @@ COPY . ./
 #CMD ./mvn dependency:resolve
 #
 #COPY src ./src
-#EXPOSE 8082
-CMD ["./mvnw", "spring-boot:run"]
+EXPOSE $PORT:8080
+CMD ["./mvnw", "spring-boot:run", "-Dserver.port=$PORT"]
