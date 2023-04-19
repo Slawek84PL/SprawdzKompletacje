@@ -9,9 +9,9 @@ COPY . ./
 #COPY mvnw pom.xml ./
 #COPY frontend frontend
 #COPY pliki pliki
-#CMD ./mvn dependency:resolve
+CMD ./mvn dependency:resolve
 #
 #COPY src ./src
-#EXPOSE $PORT:$PORT
-#CMD ["./mvnw", "spring-boot:run", "-Dserver.port=$PORT"]
-CMD ["java -jar target/SprawdzKompletacje-0.0.1-SNAPSHOT.jar --server.port=$PORT"]
+EXPOSE $PORT:$PORT
+CMD ["./mvnw", "spring-boot:run"]
+#CMD ["java -jar target/SprawdzKompletacje-0.0.1-SNAPSHOT.jar --server.port=$PORT"]
