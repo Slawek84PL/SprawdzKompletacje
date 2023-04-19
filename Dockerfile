@@ -13,4 +13,5 @@ COPY . ./
 #
 #COPY src ./src
 #EXPOSE $PORT:$PORT
-CMD ["./mvnw", "spring-boot:run", "-Dserver.port=$PORT"]
+#CMD ["./mvnw", "spring-boot:run", "-Dserver.port=$PORT"]
+CMD ["java -jar target/SprawdzKompletacje-0.0.1-SNAPSHOT.jar --server.port=$PORT"]
