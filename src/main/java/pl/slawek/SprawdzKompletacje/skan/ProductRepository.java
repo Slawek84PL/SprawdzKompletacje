@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje;
+package pl.slawek.SprawdzKompletacje.skan;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.slawek.SprawdzKompletacje.skan.Product;
