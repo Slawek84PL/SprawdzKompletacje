@@ -1,0 +1,12 @@
+file:
+  path: C:\\Users\\slapy\\OneDrive\\Dokumenty\\Projekty\\SprawdzKompletacje\\pliki\\
+  finishedFilePath: finished\\
+
+
+#spring:
+#  devtools:
+#    add-properties: true
+
+#logging:
+#  level:
+#    web: DEBUG
