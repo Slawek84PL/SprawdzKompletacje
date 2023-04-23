@@ -2,7 +2,9 @@ package pl.slawek.SprawdzKompletacje.entity.product;
 
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Service;
+import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
@@ -12,13 +14,15 @@ public
 class ProductService {
 
     private final ProductRepository productRepo;
+    private final OrderService orderService;
 
-    public ProductService(final ProductRepository productRepo) {
+    public ProductService(final ProductRepository productRepo, final OrderService orderService) {
         this.productRepo = productRepo;
+        this.orderService = orderService;
     }
 
-    public void readExcel(String uploadingFile) {
-
+    public void readExcel(File uploadingFile, String fileName) {
+        long orderId = orderService.addOrder(fileName);
         Workbook workbook;
         try (FileInputStream inputStream = new FileInputStream(uploadingFile)) {
             workbook = WorkbookFactory.create(inputStream);
@@ -56,6 +60,7 @@ class ProductService {
                             break;
                     }
                 }
+                product.setOrderNumberId(orderId);
                 productRepo.save(product);
             }
         } catch (IOException e) {

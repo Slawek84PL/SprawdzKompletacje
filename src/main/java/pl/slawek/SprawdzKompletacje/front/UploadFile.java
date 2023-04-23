@@ -12,11 +12,9 @@ import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
 class UploadFile extends VerticalLayout {
 
     private final FileBuffer buffer = new FileBuffer();
-    private final CopyFileService copyFileService;
     private final ProductService productService;
 
-    public UploadFile(final PathFileConfig pathFileConfig, final ProductService productService) {
-        this.copyFileService = new CopyFileService(pathFileConfig);
+    public UploadFile(final ProductService productService) {
         this.productService = productService;
         createUpload();
     }
@@ -28,7 +26,7 @@ class UploadFile extends VerticalLayout {
         upload.setMaxFileSize(10240);
 
         upload.addSucceededListener(event -> {
-            productService.readExcel(buffer.getFileData().getFile().getAbsolutePath());
+            productService.readExcel(buffer.getFileData().getFile(), buffer.getFileName());
         });
 
         add(upload);

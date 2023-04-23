@@ -591,7 +591,7 @@ export const vaadinConfig: UserConfigFn = (env) => {
   const devMode = env.mode === 'development';
 
   if (devMode && process.env.watchDogPort) {
-    // Open a connection with the Java dev-mode handler in order to finish
+    // Open a connection with the Java dev-mode handler in orderNumber to finish
     // vite when it exits or crashes.
     runWatchDog(process.env.watchDogPort, process.env.watchDogHost);
   }

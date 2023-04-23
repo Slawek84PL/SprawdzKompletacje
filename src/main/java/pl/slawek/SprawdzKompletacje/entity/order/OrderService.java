@@ -3,6 +3,7 @@ package pl.slawek.SprawdzKompletacje.entity.order;
 import org.springframework.stereotype.Service;
 
 @Service
+public
 class OrderService {
     private final OrderRepository orderRepo;
 
@@ -10,10 +11,10 @@ class OrderService {
         this.orderRepo = orderRepo;
     }
 
-    private Long addOrder(String fileName) {
-        Order order = new Order();
-        order.setFileName(fileName);
-        orderRepo.save(order);
-        return order.getId();
+    public long addOrder(String fileName) {
+        OrderNumber orderNumber = new OrderNumber();
+        orderNumber.setFileName(fileName);
+        orderRepo.save(orderNumber);
+        return orderNumber.getId();
     }
 }

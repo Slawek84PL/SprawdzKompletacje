@@ -21,6 +21,7 @@ public class Product {
     private String name;
     private int quantity;
     private int scannedQuantity;
+    private long OrderNumberId;
 
 
 }

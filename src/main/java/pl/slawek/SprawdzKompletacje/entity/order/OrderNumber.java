@@ -1,7 +1,6 @@
 package pl.slawek.SprawdzKompletacje.entity.order;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,13 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-class Order {
+public class OrderNumber {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @NotNull
     private String fileName;
 
 }
