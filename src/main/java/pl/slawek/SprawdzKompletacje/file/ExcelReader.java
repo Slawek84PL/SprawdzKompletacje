@@ -35,10 +35,7 @@ public class ExcelReader {
                 Row currentRow = rowIterator.next();
                 Iterator<Cell> cellIterator = currentRow.iterator();
 
-                String code = "";
-                String name = "";
-                int quantity = 0;
-                int scannedQuantity = 0;
+                Product product = new Product();
 
                 while (cellIterator.hasNext()) {
                     Cell currentCell = cellIterator.next();
@@ -47,25 +44,24 @@ public class ExcelReader {
                     switch (columnIndex) {
                         case 0:
                             if(currentCell.getCellType() == CellType.NUMERIC){
-                                code = String.valueOf((int) currentCell.getNumericCellValue());
+                                product.setBarcode(String.valueOf((int) currentCell.getNumericCellValue()));
                             } else {
-                                code = currentCell.getStringCellValue();
+                                product.setBarcode(currentCell.getStringCellValue());
                             }
                             break;
                         case 1:
-                            name = currentCell.getStringCellValue();
+                            product.setName(currentCell.getStringCellValue());
                             break;
                         case 2:
-                            quantity = (int) currentCell.getNumericCellValue();
+                            product.setQuantity((int) currentCell.getNumericCellValue());
                             break;
                         case 3:
-                            scannedQuantity = (int) currentCell.getNumericCellValue();
+                            product.setScannedQuantity((int) currentCell.getNumericCellValue());
                             break;
                         default:
                             break;
                     }
                 }
-                Product product = new Product(code, name, quantity, scannedQuantity);
                 productList.add(product);
             }
         } catch (IOException e) {
