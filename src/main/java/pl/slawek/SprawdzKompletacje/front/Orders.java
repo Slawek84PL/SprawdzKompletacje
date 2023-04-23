@@ -19,8 +19,9 @@ import pl.slawek.SprawdzKompletacje.file.ExcelReader;
 import pl.slawek.SprawdzKompletacje.file.ExcelWriter;
 import pl.slawek.SprawdzKompletacje.file.FileLister;
 
-import pl.slawek.SprawdzKompletacje.skan.Product;
+import pl.slawek.SprawdzKompletacje.entity.product.Product;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +62,7 @@ public class Orders extends VerticalLayout {
         fileSelector.addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 selectedFile = event.getValue();
-                productList = excelReader.readProductsFromExcel(selectedFile);
+                productList = excelReader.readProductsFromExcel(new File(selectedFile));
                 productsGrid.setItems(productList);
                 clear();
                 barcodeScanner.setReadOnly(false);
@@ -123,7 +124,7 @@ public class Orders extends VerticalLayout {
             Product product = productsGrid.getSelectedItems().iterator().next();
             product.setScannedQuantity(product.getScannedQuantity() + quantity);
             excelWriter.updateProduct(selectedFile, product);
-            productList = excelReader.readProductsFromExcel(selectedFile);
+            productList = excelReader.readProductsFromExcel(new File(selectedFile));
             productsGrid.setItems(productList);
             clear();
         });

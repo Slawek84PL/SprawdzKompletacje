@@ -6,16 +6,18 @@ import com.vaadin.flow.component.upload.receivers.FileBuffer;
 import com.vaadin.flow.router.Route;
 import pl.slawek.SprawdzKompletacje.file.CopyFileService;
 import pl.slawek.SprawdzKompletacje.file.config.PathFileConfig;
-
-import java.io.InputStream;
+import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
 
 @Route(value = "Upload", layout = MainView.class)
 class UploadFile extends VerticalLayout {
 
     private final FileBuffer buffer = new FileBuffer();
     private final CopyFileService copyFileService;
-    public UploadFile(final PathFileConfig pathFileConfig) {
+    private final ProductService productService;
+
+    public UploadFile(final PathFileConfig pathFileConfig, final ProductService productService) {
         this.copyFileService = new CopyFileService(pathFileConfig);
+        this.productService = productService;
         createUpload();
     }
 
@@ -26,9 +28,7 @@ class UploadFile extends VerticalLayout {
         upload.setMaxFileSize(10240);
 
         upload.addSucceededListener(event -> {
-
-            InputStream inputStream = buffer.getInputStream();
-            copyFileService.copyFile(buffer.getFileName(), inputStream);
+            productService.readExcel(buffer.getFileData().getFile().getAbsolutePath());
         });
 
         add(upload);

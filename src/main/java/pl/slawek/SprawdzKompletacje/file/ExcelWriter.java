@@ -4,7 +4,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import pl.slawek.SprawdzKompletacje.file.config.PathFileConfig;
-import pl.slawek.SprawdzKompletacje.skan.Product;
+import pl.slawek.SprawdzKompletacje.entity.product.Product;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

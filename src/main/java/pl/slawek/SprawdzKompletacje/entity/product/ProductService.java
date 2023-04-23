@@ -1,36 +1,26 @@
-package pl.slawek.SprawdzKompletacje.file;
+package pl.slawek.SprawdzKompletacje.entity.product;
 
-import lombok.Data;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Service;
-import pl.slawek.SprawdzKompletacje.file.config.PathFileConfig;
-import pl.slawek.SprawdzKompletacje.entity.product.Product;
-import pl.slawek.SprawdzKompletacje.entity.product.ProductRepository;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-@Data
 @Service
-public class ExcelReader {
+public
+class ProductService {
 
-    private final PathFileConfig pathFileConfig;
     private final ProductRepository productRepo;
 
-    public ExcelReader(final PathFileConfig pathFileConfig, final ProductRepository productRepo) {
-        this.pathFileConfig = pathFileConfig;
+    public ProductService(final ProductRepository productRepo) {
         this.productRepo = productRepo;
     }
 
-    public List<Product> readProductsFromExcel(File selectedFile) {
-        List<Product> productList = new ArrayList<>();
+    public void readExcel(String uploadingFile) {
 
         Workbook workbook;
-        try (FileInputStream inputStream = new FileInputStream(pathFileConfig.getPath() + selectedFile)) {
+        try (FileInputStream inputStream = new FileInputStream(uploadingFile)) {
             workbook = WorkbookFactory.create(inputStream);
             Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = sheet.iterator();
@@ -66,13 +56,11 @@ public class ExcelReader {
                             break;
                     }
                 }
-                productList.add(product);
                 productRepo.save(product);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return productList;
     }
+
 }

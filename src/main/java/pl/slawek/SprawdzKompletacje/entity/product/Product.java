@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje.skan;
+package pl.slawek.SprawdzKompletacje.entity.product;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
