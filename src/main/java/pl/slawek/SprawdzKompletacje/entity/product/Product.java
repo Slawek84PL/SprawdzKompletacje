@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -21,7 +23,10 @@ public class Product {
     private String name;
     private int quantity;
     private int scannedQuantity;
-    private long OrderNumberId;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_number")
+    private OrderNumber orderNumber;
 
 }

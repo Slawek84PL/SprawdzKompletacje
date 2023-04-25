@@ -1,21 +1,24 @@
 package pl.slawek.SprawdzKompletacje.front;
 
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.component.upload.UploadI18N;
 import com.vaadin.flow.component.upload.receivers.FileBuffer;
 import com.vaadin.flow.router.Route;
-import pl.slawek.SprawdzKompletacje.file.CopyFileService;
-import pl.slawek.SprawdzKompletacje.file.config.PathFileConfig;
-import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
+import com.vaadin.flow.server.UploadException;
+import pl.slawek.SprawdzKompletacje.entity.ExcelReaderToDB;
+
+import java.io.IOException;
 
 @Route(value = "Upload", layout = MainView.class)
 class UploadFile extends VerticalLayout {
 
+    private UploadFilesI18N i18N = new UploadFilesI18N();
     private final FileBuffer buffer = new FileBuffer();
-    private final ProductService productService;
-
-    public UploadFile(final ProductService productService) {
-        this.productService = productService;
+    private final ExcelReaderToDB excelReaderToDB;
+    public UploadFile(final ExcelReaderToDB excelReaderToDB) {
+        this.excelReaderToDB = excelReaderToDB;
         createUpload();
     }
 
@@ -25,8 +28,16 @@ class UploadFile extends VerticalLayout {
         upload.setMaxFiles(1);
         upload.setMaxFileSize(10240);
 
+        upload.setI18n(i18N);
+
         upload.addSucceededListener(event -> {
-            productService.readExcel(buffer.getFileData().getFile(), buffer.getFileName());
+
+            // TODO: 2023-04-23 sptawdzić gdzie umieścić ten wyjątek i zmiane FileBuffer na MemoryBuffer
+            try {
+                excelReaderToDB.readExcelFile(buffer.getFileData().getFile(), buffer.getFileName());
+            } catch (IOException ignore) {
+            }
+
         });
 
         add(upload);

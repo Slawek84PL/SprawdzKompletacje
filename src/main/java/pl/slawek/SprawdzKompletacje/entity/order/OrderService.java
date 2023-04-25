@@ -1,20 +1,36 @@
 package pl.slawek.SprawdzKompletacje.entity.order;
 
 import org.springframework.stereotype.Service;
+import pl.slawek.SprawdzKompletacje.entity.product.Product;
+import pl.slawek.SprawdzKompletacje.entity.product.ProductRepository;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public
 class OrderService {
     private final OrderRepository orderRepo;
+    private final ProductRepository productRepository;
 
-    OrderService(final OrderRepository orderRepo) {
+    OrderService(final OrderRepository orderRepo, final ProductRepository productRepository) {
         this.orderRepo = orderRepo;
+        this.productRepository = productRepository;
     }
 
-    public long addOrder(String fileName) {
-        OrderNumber orderNumber = new OrderNumber();
-        orderNumber.setFileName(fileName);
+
+    public void addProductToOrder(final OrderNumber orderNumber, List<Product> products) {
+        orderNumber.setProducts(products);
         orderRepo.save(orderNumber);
-        return orderNumber.getId();
+
+    }
+
+    public List<String> findAll() {
+        List<OrderNumber> orders = orderRepo.findAll();
+        return orders.stream().
+                map(OrderNumber::getFileName)
+                .sorted().toList();
+
     }
 }

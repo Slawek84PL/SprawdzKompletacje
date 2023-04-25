@@ -14,6 +14,7 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
 import pl.slawek.SprawdzKompletacje.file.FinishFileService;
 import pl.slawek.SprawdzKompletacje.file.ExcelReader;
 import pl.slawek.SprawdzKompletacje.file.ExcelWriter;
@@ -47,8 +48,11 @@ public class Orders extends VerticalLayout {
     private final ExcelWriter excelWriter;
     private final FinishFileService finishFileService;
 
-    public Orders(final FileLister fileLister, final ExcelReader excelReader, final ExcelWriter excelWriter, final FinishFileService finishFileService) {
+    private final OrderService orderService;
+
+    public Orders(final FileLister fileLister, final ExcelReader excelReader, final ExcelWriter excelWriter, final FinishFileService finishFileService, final OrderService orderService) {
         this.finishFileService = finishFileService;
+        this.orderService = orderService;
         status = new Span();
         this.fileLister = fileLister;
         this.excelReader = excelReader;
@@ -131,7 +135,7 @@ public class Orders extends VerticalLayout {
 
         reloadButton.setEnabled(true);
         reloadButton.addClickListener(event -> {
-            fileSelector.setItems(fileLister.getExcelFileNames());
+            fileSelector.setItems(orderService.findAll());
             fileSelector.setReadOnly(false);
             // TODO: 2023-03-26 czyszczenie grid 
             clear();

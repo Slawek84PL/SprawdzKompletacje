@@ -455,7 +455,7 @@ export class VaadinDevTools extends LitElement {
           align-items: center;
           padding: 0.375rem;
           white-space: nowrap;
-          orderNumber: 1;
+          order: 1;
           background-color: rgba(0, 0, 0, 0.2);
           gap: 0.5rem;
         }
@@ -685,7 +685,7 @@ export class VaadinDevTools extends LitElement {
 
         .message .persist.on::after {
           content: '';
-          orderNumber: -1;
+          order: -1;
           position: absolute;
           width: 0.75em;
           height: 0.25em;
