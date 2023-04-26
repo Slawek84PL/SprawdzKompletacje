@@ -11,7 +11,6 @@ import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

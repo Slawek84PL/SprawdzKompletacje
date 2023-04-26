@@ -1,6 +1,5 @@
 package pl.slawek.SprawdzKompletacje.entity.order;
 
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
 import pl.slawek.SprawdzKompletacje.entity.product.ProductRepository;
