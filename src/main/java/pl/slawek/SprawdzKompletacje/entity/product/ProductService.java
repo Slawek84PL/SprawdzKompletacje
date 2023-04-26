@@ -1,28 +1,27 @@
 package pl.slawek.SprawdzKompletacje.entity.product;
 
-import org.apache.poi.ss.usermodel.*;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Iterator;
+import java.util.List;
 
 @Service
 public class ProductService {
 
     private final ProductRepository productRepo;
+    private final OrderService orderService;
 
-    public ProductService(final ProductRepository productRepo) {
+    public ProductService(final ProductRepository productRepo, final OrderService orderService) {
         this.productRepo = productRepo;
+        this.orderService = orderService;
     }
 
     public void addProduct(Product product) {
         productRepo.save(product);
     }
 
-
+    public List<Product> getAllProductForOrderNumber(final String orderNumber) {
+        long orderId = orderService.findOrderNumber(orderNumber);
+        return productRepo.findByOrderNumber_Id(orderId);
+    }
 }

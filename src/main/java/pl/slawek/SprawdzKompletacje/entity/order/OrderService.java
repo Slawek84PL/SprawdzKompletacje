@@ -33,4 +33,8 @@ class OrderService {
                 .sorted().toList();
 
     }
+
+    public long findOrderNumber(final String orderNumber) {
+        return orderRepo.findByFileName(orderNumber).get().getId();
+    }
 }
