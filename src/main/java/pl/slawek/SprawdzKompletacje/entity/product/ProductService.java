@@ -21,7 +21,11 @@ public class ProductService {
     }
 
     public List<Product> getAllProductForOrderNumber(final String orderNumber) {
-        long orderId = orderService.findOrderNumber(orderNumber);
+        long orderId = orderService.getIdByOrderNumber(orderNumber);
         return productRepo.findByOrderNumber_Id(orderId);
+    }
+
+    public void updateProduct(final String fileName, final Product product) {
+        productRepo.updateProduct(product.getScannedQuantity(), product.getId(), orderService.findOrderNumber(fileName));
     }
 }

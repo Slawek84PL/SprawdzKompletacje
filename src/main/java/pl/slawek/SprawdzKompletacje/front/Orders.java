@@ -14,11 +14,12 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.springframework.stereotype.Component;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
+import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
 import pl.slawek.SprawdzKompletacje.file.FinishFileService;
 import pl.slawek.SprawdzKompletacje.file.ExcelReader;
 import pl.slawek.SprawdzKompletacje.file.ExcelWriter;
-import pl.slawek.SprawdzKompletacje.file.FileLister;
 
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
 
@@ -26,6 +27,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+@Component
 @CssImport("./styles/my-grid-styles.css")
 @Route(value = "Zamówienia", layout = MainView.class)
 @PageTitle("Zamówienia")
@@ -43,20 +45,18 @@ public class Orders extends VerticalLayout {
     private final Grid<Product> productsGrid = new Grid<>(Product.class, false);
     private String selectedFile;
     private List<Product> productList = new ArrayList<>();
-    private final FileLister fileLister;
-    private final ExcelReader excelReader;
     private final ExcelWriter excelWriter;
     private final FinishFileService finishFileService;
 
     private final OrderService orderService;
+    private final ProductService productService;
 
-    public Orders(final FileLister fileLister, final ExcelReader excelReader, final ExcelWriter excelWriter, final FinishFileService finishFileService, final OrderService orderService) {
+    public Orders(final ExcelWriter excelWriter, final FinishFileService finishFileService, final OrderService orderService, final ProductService productService) {
         this.finishFileService = finishFileService;
         this.orderService = orderService;
-        status = new Span();
-        this.fileLister = fileLister;
-        this.excelReader = excelReader;
         this.excelWriter = excelWriter;
+        this.productService = productService;
+        status = new Span();
         configureComponents();
         buildLayout();
     }
@@ -66,8 +66,9 @@ public class Orders extends VerticalLayout {
         fileSelector.addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 selectedFile = event.getValue();
-                productList = excelReader.readProductsFromExcel(new File(selectedFile));
+                productList = productService.getAllProductForOrderNumber(selectedFile);
                 productsGrid.setItems(productList);
+                productsGrid.setVisible(true);
                 clear();
                 barcodeScanner.setReadOnly(false);
                 finishFile.setEnabled(true);
@@ -127,8 +128,8 @@ public class Orders extends VerticalLayout {
             int quantity = quantityField.getValue();
             Product product = productsGrid.getSelectedItems().iterator().next();
             product.setScannedQuantity(product.getScannedQuantity() + quantity);
-            excelWriter.updateProduct(selectedFile, product);
-            productList = excelReader.readProductsFromExcel(new File(selectedFile));
+            productService.updateProduct(selectedFile, product);
+            productList = productService.getAllProductForOrderNumber(selectedFile);
             productsGrid.setItems(productList);
             clear();
         });
@@ -137,7 +138,8 @@ public class Orders extends VerticalLayout {
         reloadButton.addClickListener(event -> {
             fileSelector.setItems(orderService.findAll());
             fileSelector.setReadOnly(false);
-            // TODO: 2023-03-26 czyszczenie grid 
+            // TODO: 2023-03-26 czyszczenie grid
+            productsGrid.setVisible(false);
             clear();
             barcodeScanner.setReadOnly(true);
             fileSelector.focus();

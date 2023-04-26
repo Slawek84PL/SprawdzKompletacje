@@ -4,9 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
 import pl.slawek.SprawdzKompletacje.entity.product.ProductRepository;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public
@@ -34,7 +32,11 @@ class OrderService {
 
     }
 
-    public long findOrderNumber(final String orderNumber) {
+    public long getIdByOrderNumber(final String orderNumber) {
         return orderRepo.findByFileName(orderNumber).get().getId();
+    }
+
+    public OrderNumber findOrderNumber(final String orderNumber) {
+        return orderRepo.findByFileName(orderNumber).get();
     }
 }
