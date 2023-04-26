@@ -13,4 +13,4 @@ COPY target/ target
 COPY src ./src
 
 
-CMD java -jar -Dspring.profiles.active=prod -Dserver.port=$PORT target/SprawdzKompletacje-0.0.1-SNAPSHOT.jar
+CMD java -jar -Dspring.profiles.active=prod target/SprawdzKompletacje-0.0.1-SNAPSHOT.jar
