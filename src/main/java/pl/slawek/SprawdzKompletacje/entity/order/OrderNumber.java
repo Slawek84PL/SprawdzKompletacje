@@ -1,14 +1,13 @@
 package pl.slawek.SprawdzKompletacje.entity.order;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +26,16 @@ public class OrderNumber {
     private String fileName;
 
     @Column(nullable = false)
-    private LocalDate date;
+    private LocalDateTime date;
 
     @OneToMany(mappedBy = "orderNumber", cascade =CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
     private boolean isFinished = false;
+
+    @PrePersist
+    private void setDate() {
+        this.date = LocalDateTime.now();
+    }
 
 }

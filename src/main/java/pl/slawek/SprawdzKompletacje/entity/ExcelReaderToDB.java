@@ -30,7 +30,6 @@ public class ExcelReaderToDB {
             Sheet sheet = workbook.getSheetAt(0);
             OrderNumber orderNumber = new OrderNumber();
             orderNumber.setFileName(fileName.replaceAll("\\.xlsx?$", ""));
-            orderNumber.setDate(LocalDate.now());
 
             for (Row row : sheet) {
 
