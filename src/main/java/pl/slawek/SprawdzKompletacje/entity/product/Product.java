@@ -25,7 +25,7 @@ public class Product {
     private int scannedQuantity;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_number")
     private OrderNumber orderNumber;
 
