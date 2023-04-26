@@ -45,16 +45,14 @@ public class Orders extends VerticalLayout {
     private final Grid<Product> productsGrid = new Grid<>(Product.class, false);
     private String selectedFile;
     private List<Product> productList = new ArrayList<>();
-    private final ExcelWriter excelWriter;
     private final FinishFileService finishFileService;
 
     private final OrderService orderService;
     private final ProductService productService;
 
-    public Orders(final ExcelWriter excelWriter, final FinishFileService finishFileService, final OrderService orderService, final ProductService productService) {
+    public Orders(final FinishFileService finishFileService, final OrderService orderService, final ProductService productService) {
         this.finishFileService = finishFileService;
         this.orderService = orderService;
-        this.excelWriter = excelWriter;
         this.productService = productService;
         status = new Span();
         configureComponents();
@@ -105,6 +103,7 @@ public class Orders extends VerticalLayout {
         finishFileButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
         finishFileButton.addClickListener(event -> {
             finishFileService.moveAndRenameFile(fileSelector.getValue());
+            orderService.finishOrder(fileSelector.getValue());
             finishDiv.setVisible(false);
             clear();
             fileSelector.setReadOnly(true);
@@ -138,7 +137,6 @@ public class Orders extends VerticalLayout {
         reloadButton.addClickListener(event -> {
             fileSelector.setItems(orderService.findAll());
             fileSelector.setReadOnly(false);
-            // TODO: 2023-03-26 czyszczenie grid
             productsGrid.setVisible(false);
             clear();
             barcodeScanner.setReadOnly(true);

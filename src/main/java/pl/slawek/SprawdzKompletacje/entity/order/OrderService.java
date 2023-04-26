@@ -1,5 +1,6 @@
 package pl.slawek.SprawdzKompletacje.entity.order;
 
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
 import pl.slawek.SprawdzKompletacje.entity.product.ProductRepository;
@@ -25,9 +26,9 @@ class OrderService {
     }
 
     public List<String> findAll() {
-        List<OrderNumber> orders = orderRepo.findAll();
-        return orders.stream().
-                map(OrderNumber::getFileName)
+        List<OrderNumber> orders = orderRepo.findByIsFinishedFalse();
+        return orders.stream()
+                .map(OrderNumber::getFileName)
                 .sorted().toList();
 
     }
@@ -38,5 +39,11 @@ class OrderService {
 
     public OrderNumber findOrderNumber(final String orderNumber) {
         return orderRepo.findByFileName(orderNumber).get();
+    }
+
+    public void finishOrder(final String fileName) {
+        OrderNumber orderNumber = orderRepo.findByFileName(fileName).get();
+        orderNumber.setFinished(true);
+        orderRepo.save(orderNumber);
     }
 }

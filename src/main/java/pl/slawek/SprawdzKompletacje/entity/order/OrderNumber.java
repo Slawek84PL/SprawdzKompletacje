@@ -32,9 +32,6 @@ public class OrderNumber {
     @OneToMany(mappedBy = "orderNumber", cascade =CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
-
-    public void addProduct(Product product) {
-        products.add(product);
-    }
+    private boolean isFinished = false;
 
 }
