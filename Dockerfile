@@ -7,7 +7,6 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
-COPY pliki pliki
 CMD ./mvn dependency:resolve
 COPY target/ target
 COPY src ./src
