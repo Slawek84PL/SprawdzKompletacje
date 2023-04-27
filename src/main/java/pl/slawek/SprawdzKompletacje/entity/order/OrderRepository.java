@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface OrderRepository extends JpaRepository<OrderNumber, Long> {
+    List<OrderNumber> findByIsFinishedTrue();
 
     Optional<OrderNumber> findByFileName(String fileName);
 

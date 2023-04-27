@@ -130,7 +130,7 @@ public class Orders extends VerticalLayout {
 
         reloadButton.setEnabled(true);
         reloadButton.addClickListener(event -> {
-            fileSelector.setItems(orderService.findAll());
+            fileSelector.setItems(orderService.findAllActiveOrders());
             fileSelector.setReadOnly(false);
             productsGrid.setVisible(false);
             clear();

@@ -24,7 +24,7 @@ class OrderService {
 
     }
 
-    public List<String> findAll() {
+    public List<String> findAllActiveOrders() {
         List<OrderNumber> orders = orderRepo.findByIsFinishedFalse();
         return orders.stream()
                 .map(OrderNumber::getFileName)
@@ -44,5 +44,9 @@ class OrderService {
         OrderNumber orderNumber = orderRepo.findByFileName(fileName).get();
         orderNumber.setFinished(true);
         orderRepo.save(orderNumber);
+    }
+
+    public List<OrderNumber> findAllFinishedOrder() {
+        return orderRepo.findByIsFinishedTrue();
     }
 }
