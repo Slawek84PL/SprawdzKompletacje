@@ -16,8 +16,9 @@ import java.util.List;
 @Entity
 @Table(name = "order_numbers")
 public class OrderNumber {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -36,5 +37,4 @@ public class OrderNumber {
     private void setDate() {
         this.date = LocalDateTime.now();
     }
-
 }

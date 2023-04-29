@@ -5,6 +5,7 @@ import pl.slawek.SprawdzKompletacje.entity.product.Product;
 import pl.slawek.SprawdzKompletacje.entity.product.ProductRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public
@@ -16,7 +17,6 @@ class OrderService {
         this.orderRepo = orderRepo;
         this.productRepository = productRepository;
     }
-
 
     public void addProductToOrder(final OrderNumber orderNumber, List<Product> products) {
         orderNumber.setProducts(products);
@@ -44,5 +44,9 @@ class OrderService {
         OrderNumber orderNumber = orderRepo.findByFileName(fileName).get();
         orderNumber.setFinished(true);
         orderRepo.save(orderNumber);
+    }
+
+    public Optional<OrderNumber> fingById(final Long id) {
+        return orderRepo.findById(id);
     }
 }
