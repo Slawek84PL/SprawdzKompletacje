@@ -43,7 +43,7 @@ public class ExcelReaderToDB {
                 product.setOrderNumber(orderNumber);
                 products.add(product);
             }
-            orderService.addProductToOrder(orderNumber, products);
+            orderService.addProductsToOrder(orderNumber, products);
         }
     }
 }

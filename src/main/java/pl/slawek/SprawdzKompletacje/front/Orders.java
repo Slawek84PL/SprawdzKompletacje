@@ -16,7 +16,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
 import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
-import pl.slawek.SprawdzKompletacje.file.FinishFileService;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
 
 import java.util.ArrayList;
@@ -40,13 +39,11 @@ public class Orders extends VerticalLayout {
     private final Grid<Product> productsGrid = new Grid<>(Product.class, false);
     private String selectedFile;
     private List<Product> productList = new ArrayList<>();
-    private final FinishFileService finishFileService;
 
     private final OrderService orderService;
     private final ProductService productService;
 
-    public Orders(final FinishFileService finishFileService, final OrderService orderService, final ProductService productService) {
-        this.finishFileService = finishFileService;
+    public Orders(final OrderService orderService, final ProductService productService) {
         this.orderService = orderService;
         this.productService = productService;
         status = new Span();
@@ -97,7 +94,6 @@ public class Orders extends VerticalLayout {
         finishFileButton.setEnabled(true);
         finishFileButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
         finishFileButton.addClickListener(event -> {
-            finishFileService.moveAndRenameFile(fileSelector.getValue());
             orderService.finishOrder(fileSelector.getValue());
             finishDiv.setVisible(false);
             clear();
@@ -121,8 +117,7 @@ public class Orders extends VerticalLayout {
         addButton.addClickListener(event -> {
             int quantity = quantityField.getValue();
             Product product = productsGrid.getSelectedItems().iterator().next();
-            product.setScannedQuantity(product.getScannedQuantity() + quantity);
-            productService.updateProduct(selectedFile, product);
+            productService.updatePositionOnProduct(product, quantity);
             productList = productService.getAllProductForOrderNumber(selectedFile);
             productsGrid.setItems(productList);
             clear();
