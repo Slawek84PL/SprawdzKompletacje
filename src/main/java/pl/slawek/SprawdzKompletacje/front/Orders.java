@@ -14,6 +14,7 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
 import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
@@ -27,7 +28,7 @@ import java.util.Optional;
 @PageTitle("Zamówienia")
 public class Orders extends VerticalLayout {
 
-    private final ComboBox<String> fileSelector = new ComboBox<>("Wybierz zlecenie");
+    private final ComboBox<OrderNumber> fileSelector = new ComboBox<>("Wybierz zlecenie");
     private final TextField barcodeScanner = new TextField("Kod produktu");
     private final IntegerField quantityField = new IntegerField("Ilość pobranych sztuk");
     private final Button addButton = new Button("Zapisz");
@@ -37,7 +38,6 @@ public class Orders extends VerticalLayout {
     private final Div finishDiv = new Div();
     private final Button finishFileButton = new Button("Zakończ");
     private final Grid<Product> productsGrid = new Grid<>(Product.class, false);
-    private String selectedFile;
     private List<Product> productList = new ArrayList<>();
 
     private final OrderService orderService;
@@ -55,8 +55,7 @@ public class Orders extends VerticalLayout {
         fileSelector.setReadOnly(true);
         fileSelector.addValueChangeListener(event -> {
             if (event.getValue() != null) {
-                selectedFile = event.getValue();
-                productList = productService.getAllProductForOrderNumber(selectedFile);
+                productList = fileSelector.getValue().getProducts();
                 productsGrid.setItems(productList);
                 productsGrid.setVisible(true);
                 clear();
@@ -94,7 +93,7 @@ public class Orders extends VerticalLayout {
         finishFileButton.setEnabled(true);
         finishFileButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
         finishFileButton.addClickListener(event -> {
-            orderService.finishOrder(fileSelector.getValue());
+            orderService.finishOrder(fileSelector.getValue().getFileName());
             finishDiv.setVisible(false);
             clear();
             fileSelector.setReadOnly(true);
@@ -118,7 +117,7 @@ public class Orders extends VerticalLayout {
             int quantity = quantityField.getValue();
             Product product = productsGrid.getSelectedItems().iterator().next();
             productService.updatePositionOnProduct(product, quantity);
-            productList = productService.getAllProductForOrderNumber(selectedFile);
+            productList = fileSelector.getValue().getProducts();
             productsGrid.setItems(productList);
             clear();
         });
@@ -126,12 +125,13 @@ public class Orders extends VerticalLayout {
         reloadButton.setEnabled(true);
         reloadButton.addClickListener(event -> {
             fileSelector.setItems(orderService.findAllActiveOrders());
+            fileSelector.setItemLabelGenerator(OrderNumber::getFileName);
             fileSelector.setReadOnly(false);
             productsGrid.setVisible(false);
             clear();
             barcodeScanner.setReadOnly(true);
             fileSelector.focus();
-                });
+        });
 
         productsGrid.addColumn(Product::getBarcode).setHeader("Kod produktu").setAutoWidth(true);
         productsGrid.addColumn(Product::getName).setHeader("Nazwa produktu").setAutoWidth(true);
@@ -151,11 +151,13 @@ public class Orders extends VerticalLayout {
     }
 
     private void buildLayout() {
-        Div div = new Div();
         HorizontalLayout hr = new HorizontalLayout();
         hr.add(reloadButton,finishFile, finishDiv);
+
         finishDiv.add(status, finishFileButton);
         finishDiv.setVisible(false);
+
+        Div div = new Div();
         div.add(fileSelector, barcodeScanner, quantityField);
         add(hr, div, addButton, productsGrid);
     }
