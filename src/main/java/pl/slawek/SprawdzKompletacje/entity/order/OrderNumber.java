@@ -1,14 +1,18 @@
 package pl.slawek.SprawdzKompletacje.entity.order;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@RequiredArgsConstructor
 @Entity
 @Table(name = "order_numbers")
 public class OrderNumber {
@@ -23,7 +27,8 @@ public class OrderNumber {
     @Column(nullable = false)
     private LocalDateTime importDate;
 
-    @OneToMany(mappedBy = "orderNumber", cascade =CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "orderNumber", cascade =CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
     private boolean isFinished = false;
@@ -34,4 +39,6 @@ public class OrderNumber {
     private void setImportDate() {
         this.importDate = LocalDateTime.now();
     }
+
+
 }

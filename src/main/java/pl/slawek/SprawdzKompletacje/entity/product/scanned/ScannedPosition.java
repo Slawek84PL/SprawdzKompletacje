@@ -1,12 +1,16 @@
 package pl.slawek.SprawdzKompletacje.entity.product.scanned;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@RequiredArgsConstructor
 @Entity
 @Table(name = "scanned_positions")
 public class ScannedPosition {
@@ -19,7 +23,8 @@ public class ScannedPosition {
 
     private int ScannedQuantity;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
