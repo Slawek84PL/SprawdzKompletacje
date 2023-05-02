@@ -19,18 +19,11 @@ class OrderService {
     public void addProductsToOrder(final OrderNumber orderNumber, List<Product> products) {
         orderNumber.setProducts(products);
         orderRepo.save(orderNumber);
-
     }
 
-    public List<String> findAllActiveOrders() {
-        List<OrderNumber> orders = orderRepo.findByIsFinishedFalse();
-        return orders.stream()
-                .map(OrderNumber::getFileName)
-                .sorted().toList();
-    }
 
-    public long getIdByOrderNumber(final String orderNumber) {
-        return orderRepo.findByFileName(orderNumber).get().getId();
+    public List<OrderNumber> findAllActiveOrders() {
+        return orderRepo.findByIsFinishedFalse();
     }
 
     public void finishOrder(final String fileName) {
