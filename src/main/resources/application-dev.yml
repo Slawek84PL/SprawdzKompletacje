@@ -4,24 +4,41 @@ file:
 
 spring:
   datasource:
-    url: jdbc:h2:file:./data/kompletacje
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
-
-  h2:
-    console:
-      enabled: true
-      path: /h2
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://slawekdb.database.windows.net:1433;encrypt=true;trustServerCertificate=false;loginTimeout=30;database=KompletacjeDB;
+    username: slawek84pl@slawekdb
+    password: Sp32143435
 
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2016Dialect
+        format_sql: true
     hibernate:
       ddl-auto: update
     show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+
+
+#spring:
+#  datasource:
+#    url: jdbc:h2:file:./data/kompletacje
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password: password
+#
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2
+#
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
 
 
 
