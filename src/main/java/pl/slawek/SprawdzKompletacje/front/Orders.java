@@ -14,6 +14,7 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import pl.slawek.SprawdzKompletacje.entity.DataService;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
 import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
@@ -42,10 +43,12 @@ public class Orders extends VerticalLayout {
 
     private final OrderService orderService;
     private final ProductService productService;
+    private final DataService dataService;
 
-    public Orders(final OrderService orderService, final ProductService productService) {
+    public Orders(final OrderService orderService, final ProductService productService, final DataService dataService) {
         this.orderService = orderService;
         this.productService = productService;
+        this.dataService = dataService;
         status = new Span();
         configureComponents();
         buildLayout();
@@ -116,7 +119,7 @@ public class Orders extends VerticalLayout {
         addButton.addClickListener(event -> {
             int quantity = quantityField.getValue();
             Product product = productsGrid.getSelectedItems().iterator().next();
-            productService.updatePositionOnProduct(product, quantity);
+            dataService.updatePositionOnProduct(fileSelector.getValue() ,product, quantity);
             productList = fileSelector.getValue().getProducts();
             productsGrid.setItems(productList);
             clear();
