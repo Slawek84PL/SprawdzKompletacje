@@ -13,11 +13,3 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-
-#spring:
-#  devtools:
-#    add-properties: false
-
-#vaadin:
-#  productionMode: true

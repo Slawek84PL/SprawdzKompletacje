@@ -2,13 +2,11 @@ package pl.slawek.SprawdzKompletacje.entity.product;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
 import pl.slawek.SprawdzKompletacje.entity.product.scanned.ScannedPosition;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter

@@ -4,15 +4,6 @@ import com.vaadin.flow.component.upload.UploadI18N;
 
 import java.util.Arrays;
 
-/**
- * Provides a default I18N configuration for the Upload examples
- *
- * At the moment the Upload component requires a fully configured I18N instance,
- * even for use-cases where you only want to change individual texts.
- *
- * This I18N configuration is an adaption of the web components I18N defaults
- * and can be used as a basis for customizing individual texts.
- */
 public class UploadFilesI18N extends UploadI18N {
     public UploadFilesI18N() {
         setDropFiles(new DropFiles().setOne("Upuść plik tutaj")
