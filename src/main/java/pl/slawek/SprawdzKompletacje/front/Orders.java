@@ -135,7 +135,7 @@ public class Orders extends VerticalLayout {
             barcodeScanner.setReadOnly(true);
             fileSelector.focus();
         });
-
+        productsGrid.setClassName("row");
         productsGrid.addColumn(Product::getBarcode).setHeader("Kod produktu").setAutoWidth(true);
         productsGrid.addColumn(Product::getName).setHeader("Nazwa produktu").setAutoWidth(true);
         productsGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona").setAutoWidth(true);
@@ -144,10 +144,10 @@ public class Orders extends VerticalLayout {
         productsGrid.setEnabled(false);
         productsGrid.setPartNameGenerator(product -> {
             if(product.getQuantity() == product.getScannedQuantity()){
-                return "green-background ";
+                return "green-background";
             }
             if (product.getQuantity() < product.getScannedQuantity()) {
-                return "red-background ";
+                return "red-background";
             }
             return null;
         });
