@@ -1,14 +1,12 @@
-package pl.slawek.SprawdzKompletacje.front;
+package pl.slawek.SprawdzKompletacje.front.datePicker;
 
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import org.springframework.stereotype.Component;
 
-@Component
-class RangeDatePicker extends VerticalLayout {
+public class RangeDatePicker extends VerticalLayout {
 
-    private DatePicker startDate = new DatePicker("Początek");
-    private DatePicker finishDate = new DatePicker("Koniec");
+    private final DatePicker startDate = new DatePickerConfig("Początek");
+    private final DatePicker finishDate = new DatePickerConfig("Koniec");
 
     public RangeDatePicker() {
         createStartDate();
@@ -21,15 +19,15 @@ class RangeDatePicker extends VerticalLayout {
         add(finishDate);
     }
 
-    private void createFinishDate() {
-        finishDate.addValueChangeListener(event -> {
-            startDate.setMin(event.getValue().minusMonths(1));
-        });
-    }
-
     private void createStartDate() {
         startDate.addValueChangeListener(event -> {
             finishDate.setMax(event.getValue().plusMonths(1));
+        });
+    }
+
+    private void createFinishDate() {
+        finishDate.addValueChangeListener(event -> {
+            startDate.setMin(event.getValue().minusMonths(1));
         });
     }
 }
