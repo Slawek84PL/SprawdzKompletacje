@@ -1,9 +1,11 @@
 package pl.slawek.SprawdzKompletacje.front;
 
 import com.vaadin.flow.component.Unit;
+import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -22,7 +24,8 @@ import java.util.List;
 
 @Route(value = "Zakonczone", layout = MainView.class)
 @PageTitle("Zakończone zamówienia")
-class OrdersFinished extends VerticalLayout {
+class OrdersFinished extends Div {
+
     private final Grid<OrderNumber> orderGrid = new Grid<>(OrderNumber.class, false);
     private final Grid<Product> productGrid = new Grid<>(Product.class,false);
     private final Grid<ScannedPosition> detailsGrid = new Grid<>(ScannedPosition.class,false);
@@ -63,6 +66,7 @@ class OrdersFinished extends VerticalLayout {
             productList = e.getItem().getProducts();
             productGrid.setItems(productList);
             productGrid.setVisible(true);
+            detailsGrid.setVisible(true);
         });
     }
 
@@ -75,7 +79,6 @@ class OrdersFinished extends VerticalLayout {
         formatMyGrid(productGrid);
         productGrid.addItemClickListener(e -> {
             detailsGrid.setItems(e.getItem().getScannedPositionList());
-            detailsGrid.setVisible(true);
         });
     }
 
@@ -88,13 +91,15 @@ class OrdersFinished extends VerticalLayout {
 
     private void formatMyGrid(Grid grid) {
         grid.setVisible(false);
-        grid.setWidth(50, Unit.PERCENTAGE);
         grid.addThemeVariants(GridVariant.LUMO_COMPACT);
     }
 
     private void addComponents() {
 //        Div divGrid = new Div();
-//        divGrid.add(productGrid,detailsGrid);
-        add(orderGrid, productGrid, detailsGrid);
+//        divGrid.add(orderGrid, productGrid,detailsGrid);
+        final HorizontalLayout hr = new HorizontalLayout();
+        hr.setAlignItems(FlexComponent.Alignment.CENTER);
+        hr.add(productGrid,detailsGrid);
+        add(orderGrid, hr);
     }
 }
