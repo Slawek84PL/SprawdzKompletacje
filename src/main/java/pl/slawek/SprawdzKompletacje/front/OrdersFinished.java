@@ -1,14 +1,10 @@
 package pl.slawek.SprawdzKompletacje.front;
 
-import com.vaadin.flow.component.Unit;
-import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.LocalDateTimeRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -29,6 +25,7 @@ class OrdersFinished extends Div {
     private final Grid<OrderNumber> orderGrid = new Grid<>(OrderNumber.class, false);
     private final Grid<Product> productGrid = new Grid<>(Product.class,false);
     private final Grid<ScannedPosition> detailsGrid = new Grid<>(ScannedPosition.class,false);
+    private final RangeDatePicker datePicker = new RangeDatePicker();
     private final DataService dataService;
     private final OrderService orderService;
     private List<Product> productList = new ArrayList<>();
@@ -100,6 +97,6 @@ class OrdersFinished extends Div {
         final HorizontalLayout hr = new HorizontalLayout();
         hr.setAlignItems(FlexComponent.Alignment.CENTER);
         hr.add(productGrid,detailsGrid);
-        add(orderGrid, hr);
+        add(datePicker, orderGrid, hr);
     }
 }
