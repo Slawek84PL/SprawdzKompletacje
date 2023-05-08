@@ -1,8 +1,13 @@
 package pl.slawek.SprawdzKompletacje.front.datePicker;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import lombok.Getter;
 
+@Getter
 public class RangeDatePicker extends VerticalLayout {
 
     private final DatePicker startDate = new DatePickerConfig("Początek");
@@ -15,19 +20,30 @@ public class RangeDatePicker extends VerticalLayout {
     }
 
     private void addComponents() {
-        add(startDate);
-        add(finishDate);
+        HorizontalLayout hr = new HorizontalLayout();
+        hr.add(startDate, finishDate);
+        add(hr);
     }
 
     private void createStartDate() {
         startDate.addValueChangeListener(event -> {
-            finishDate.setMax(event.getValue().plusMonths(1));
+            if (event.getValue() != null) {
+                finishDate.setMax(event.getValue().plusMonths(1));
+                if (finishDate.getValue().isBefore(startDate.getValue())) {
+                    finishDate.setValue(startDate.getValue());
+                }
+            }
         });
     }
 
     private void createFinishDate() {
         finishDate.addValueChangeListener(event -> {
-            startDate.setMin(event.getValue().minusMonths(1));
+            if (event.getValue() != null) {
+                startDate.setMin(event.getValue().minusMonths(1));
+                if (startDate.getValue().isAfter(finishDate.getValue())) {
+                    startDate.setValue(finishDate.getValue());
+                }
+            }
         });
     }
 }
