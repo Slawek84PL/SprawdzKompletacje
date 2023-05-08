@@ -1,8 +1,11 @@
 package pl.slawek.SprawdzKompletacje.front;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.data.renderer.LocalDateTimeRenderer;
@@ -27,6 +30,7 @@ class OrdersFinished extends Div {
     private final Grid<Product> productGrid = new Grid<>(Product.class,false);
     private final Grid<ScannedPosition> detailsGrid = new Grid<>(ScannedPosition.class,false);
     private final RangeDatePicker datePicker = new RangeDatePicker();
+    private final Button findButton = new Button("Znajdź", VaadinIcon.SEARCH.create());
     private final DataService dataService;
     private final OrderService orderService;
     private List<Product> productList = new ArrayList<>();
@@ -36,20 +40,21 @@ class OrdersFinished extends Div {
     OrdersFinished(final DataService dataService, final OrderService orderService) {
         this.dataService = dataService;
         this.orderService = orderService;
-        dataInitialize();
         configureOrderGrid();
         configureProductGrid();
         configureDetailsGrid();
+        configureFindButton();
         addComponents();
     }
 
-    private void dataInitialize() {
-        orderList = orderService.findAllFinishedOrder();
-        for (OrderNumber o : orderList) {
-            System.out.println(o.getProducts());
-        }
-        System.out.println(orderList);
-
+    private void configureFindButton() {
+        findButton.addClickListener(event -> {
+            orderList = orderService.findByIsFinishedTrueAndImportDateBetween(datePicker.getStartDate().getValue(), datePicker.getFinishDate().getValue());
+            System.out.println(orderList);
+            orderGrid.setItems(orderList);
+            productGrid.setVisible(false);
+            detailsGrid.setVisible(false);
+        });
     }
 
     private void configureOrderGrid() {
@@ -59,24 +64,25 @@ class OrdersFinished extends Div {
         orderGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
         formatMyGrid(orderGrid);
         orderGrid.setVisible(true);
-        orderGrid.setItems(orderList);
         orderGrid.addItemClickListener(e -> {
             productList = e.getItem().getProducts();
             productGrid.setItems(productList);
             productGrid.setVisible(true);
             detailsGrid.setVisible(true);
+            detailsGrid.setEnabled(false);
         });
     }
 
     private void configureProductGrid() {
         productGrid.addColumn(Product::getName).setHeader("Nazwa productu");
-        productGrid.addColumn(Product::getBarcode).setHeader("Kod prodyctu");
+        productGrid.addColumn(Product::getBarcode).setHeader("Kod produktu");
         productGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona");
         productGrid.addColumn(Product::getScannedQuantity).setHeader("Ilość zeskanowana");
         productGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
         formatMyGrid(productGrid);
         productGrid.addItemClickListener(e -> {
             detailsGrid.setItems(e.getItem().getScannedPositionList());
+            detailsGrid.setEnabled(true);
         });
     }
 
@@ -95,9 +101,9 @@ class OrdersFinished extends Div {
     private void addComponents() {
 //        Div divGrid = new Div();
 //        divGrid.add(orderGrid, productGrid,detailsGrid);
-        final HorizontalLayout hr = new HorizontalLayout();
-        hr.setAlignItems(FlexComponent.Alignment.CENTER);
-        hr.add(productGrid,detailsGrid);
-        add(datePicker, orderGrid, hr);
+        HorizontalLayout hlGrid = new HorizontalLayout();
+        hlGrid.setAlignItems(FlexComponent.Alignment.CENTER);
+        hlGrid.add(productGrid,detailsGrid);
+        add(datePicker, findButton, orderGrid, hlGrid);
     }
 }

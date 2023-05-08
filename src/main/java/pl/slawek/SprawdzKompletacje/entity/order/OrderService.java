@@ -3,6 +3,7 @@ package pl.slawek.SprawdzKompletacje.entity.order;
 import org.springframework.stereotype.Service;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,11 +34,21 @@ class OrderService {
         orderRepo.save(orderNumber);
     }
 
-    public List<OrderNumber> findAllFinishedOrder() {
-        return orderRepo.findByIsFinishedTrue();
-    }
-
     public void save(final OrderNumber orderNumber) {
         orderRepo.save(orderNumber);
+    }
+
+    public List<OrderNumber> findByIsFinishedTrueAndImportDateBetween(LocalDate start, LocalDate finish) {
+        LocalDateTime startLocal = LocalDateTime.of(
+                start.getYear(),
+                start.getMonth(),
+                start.getDayOfMonth(),
+                0,0,0);
+        LocalDateTime finishLocal = LocalDateTime.of(
+                finish.getYear(),
+                finish.getMonth(),
+                finish.getDayOfMonth()
+                , 23,59,59, 99999999);
+        return orderRepo.findByIsFinishedTrueAndImportDateGreaterThanEqualAndFinishedDateLessThanEqual(startLocal, finishLocal);
     }
 }

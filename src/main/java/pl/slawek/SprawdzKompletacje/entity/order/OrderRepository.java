@@ -4,11 +4,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface OrderRepository extends JpaRepository<OrderNumber, Long> {
+
     List<OrderNumber> findByIsFinishedTrue();
 
     Optional<OrderNumber> findByFileName(String fileName);
@@ -16,5 +18,11 @@ public interface OrderRepository extends JpaRepository<OrderNumber, Long> {
     List<OrderNumber> findAll();
 
     List<OrderNumber> findByIsFinishedFalse();
+
+    List<OrderNumber> findByIsFinishedTrueAndImportDateGreaterThanEqualAndFinishedDateLessThanEqual(LocalDateTime importDate, LocalDateTime finishedDate);
+
+    List<OrderNumber> findByIsFinishedTrueAndImportDateBetween(LocalDateTime importDateStart, LocalDateTime importDateEnd);
+
+
 
 }
