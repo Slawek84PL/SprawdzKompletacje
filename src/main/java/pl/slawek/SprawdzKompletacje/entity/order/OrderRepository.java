@@ -11,15 +11,11 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderNumber, Long> {
 
-    List<OrderNumber> findByIsFinishedTrue();
-
     Optional<OrderNumber> findByFileName(String fileName);
 
     List<OrderNumber> findAll();
 
     List<OrderNumber> findByIsFinishedFalse();
-
-    List<OrderNumber> findByIsFinishedTrueAndImportDateGreaterThanEqualAndFinishedDateLessThanEqual(LocalDateTime importDate, LocalDateTime finishedDate);
 
     List<OrderNumber> findByIsFinishedTrueAndImportDateBetween(LocalDateTime importDateStart, LocalDateTime importDateEnd);
 

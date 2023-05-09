@@ -49,6 +49,6 @@ class OrderService {
                 finish.getMonth(),
                 finish.getDayOfMonth()
                 , 23,59,59, 99999999);
-        return orderRepo.findByIsFinishedTrueAndImportDateGreaterThanEqualAndFinishedDateLessThanEqual(startLocal, finishLocal);
+        return orderRepo.findByIsFinishedTrueAndImportDateBetween(startLocal, finishLocal);
     }
 }
