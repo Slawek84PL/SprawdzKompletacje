@@ -27,6 +27,8 @@ frontend/
 *.ipr
 *.xlsx
 *.js
+*.ts
+*.json
 
 ### NetBeans ###
 /nbproject/private/
