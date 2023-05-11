@@ -15,6 +15,11 @@ notatki
 .springBeans
 .sts4-cache
 
+.mvn/
+mvnw
+mvnw.cmd
+frontend/
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
