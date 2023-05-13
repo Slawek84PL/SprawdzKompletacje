@@ -4,10 +4,12 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.FileBuffer;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.RolesAllowed;
 import pl.slawek.SprawdzKompletacje.entity.ExcelReaderToDB;
 
 import java.io.IOException;
 
+@RolesAllowed("ADMIN")
 @Route(value = "Upload", layout = MainView.class)
 class UploadFile extends VerticalLayout {
 

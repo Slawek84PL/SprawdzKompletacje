@@ -14,6 +14,7 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.RolesAllowed;
 import pl.slawek.SprawdzKompletacje.entity.DataService;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
@@ -23,7 +24,7 @@ import pl.slawek.SprawdzKompletacje.entity.product.Product;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@RolesAllowed("ADMIN")
 @CssImport("./styles/my-grid-styles.css")
 @Route(value = "Zamówienia", layout = MainView.class)
 @PageTitle("Zamówienia")
