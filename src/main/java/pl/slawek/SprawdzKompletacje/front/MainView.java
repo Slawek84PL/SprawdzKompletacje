@@ -2,6 +2,7 @@ package pl.slawek.SprawdzKompletacje.front;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
@@ -14,30 +15,44 @@ import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import jakarta.annotation.security.PermitAll;
+import org.springframework.beans.factory.annotation.Autowired;
+import pl.slawek.SprawdzKompletacje.security.user.SecurityService;
 
 
 @AnonymousAllowed
 @Route
 class MainView extends AppLayout {
+    private Button logout = new Button("Wyloguj");
+    private HorizontalLayout header = new HorizontalLayout();
 
-    MainView() {
+    private SecurityService securityService;
+
+    MainView(@Autowired SecurityService securityService) {
+        this.securityService = securityService;
         createHeader();
         createDrower();
+        createLogout();
+    }
 
+    private void createLogout() {
+        logout.addClickListener(event -> securityService.logout());
+        if (securityService.isAuthenticated()) {
+            logout.setVisible(true);
+        } else {
+            logout.setVisible(false);
+        }
+
+        header.add(logout);
     }
 
     private void createDrower() {
-
-        addToDrawer(new VerticalLayout(
-                getTabs()
-        ));
+        addToDrawer(new VerticalLayout(getTabs()));
     }
 
     private void createHeader() {
         H1 appTitle = new H1("Potwierdzenia kompletacji");
 
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), appTitle);
-        header.addClassName("header");
+        header.add(new DrawerToggle(), appTitle);
 
         addToNavbar(header);
     }
