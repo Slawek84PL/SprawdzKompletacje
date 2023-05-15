@@ -1,5 +1,5 @@
 package pl.slawek.SprawdzKompletacje.security.user;
 
-enum Role {
+public enum Role {
     USER, ADMIN
 }
