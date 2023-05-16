@@ -28,6 +28,8 @@ public class AppUser implements UserDetails {
 
     private String username;
 
+    private String name;
+
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -44,7 +46,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.name());
         return List.of(authority);
     }
 
