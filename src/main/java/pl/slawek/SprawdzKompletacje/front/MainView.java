@@ -12,20 +12,15 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
-import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.slawek.SprawdzKompletacje.security.user.SecurityService;
 
 
-@AnonymousAllowed
-@Route
 class MainView extends AppLayout {
-    private Button logout = new Button("Wyloguj");
+    private Button logout = new Button();
     private HorizontalLayout header = new HorizontalLayout();
 
-    private SecurityService securityService;
+    private final SecurityService securityService;
 
     MainView(@Autowired SecurityService securityService) {
         this.securityService = securityService;
@@ -37,6 +32,7 @@ class MainView extends AppLayout {
     private void createLogout() {
         logout.addClickListener(event -> securityService.logout());
         if (securityService.isAuthenticated()) {
+            logout.setText("Wylogu się " + securityService.getAuthenticatedUser().getName());
             logout.setVisible(true);
         } else {
             logout.setVisible(false);
