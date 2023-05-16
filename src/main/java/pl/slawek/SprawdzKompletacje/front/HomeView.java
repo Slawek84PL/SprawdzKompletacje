@@ -9,9 +9,8 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import jakarta.annotation.security.RolesAllowed;
 
-//@RolesAllowed({"USER", "ADMIN"})
 @AnonymousAllowed
-@Route(value = "Home", layout = MainView.class)
+@Route(value = "/", layout = MainView.class)
 @PageTitle("Strona domowa!")
 class HomeView extends VerticalLayout {
 
