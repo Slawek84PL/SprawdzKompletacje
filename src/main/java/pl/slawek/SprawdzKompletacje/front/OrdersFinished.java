@@ -4,13 +4,13 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.data.renderer.LocalDateTimeRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.slawek.SprawdzKompletacje.entity.DataService;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
@@ -22,6 +22,7 @@ import pl.slawek.SprawdzKompletacje.front.datePicker.RangeDatePicker;
 import java.util.ArrayList;
 import java.util.List;
 
+@RolesAllowed("ADMIN")
 @Route(value = "Zakonczone", layout = MainView.class)
 @PageTitle("Zakończone zamówienia")
 class OrdersFinished extends Div {
@@ -99,8 +100,6 @@ class OrdersFinished extends Div {
     }
 
     private void addComponents() {
-//        Div divGrid = new Div();
-//        divGrid.add(orderGrid, productGrid,detailsGrid);
         HorizontalLayout hlGrid = new HorizontalLayout();
         hlGrid.setAlignItems(FlexComponent.Alignment.CENTER);
         hlGrid.add(productGrid,detailsGrid);

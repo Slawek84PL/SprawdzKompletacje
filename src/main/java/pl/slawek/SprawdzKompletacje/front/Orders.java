@@ -24,9 +24,10 @@ import pl.slawek.SprawdzKompletacje.entity.product.Product;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @RolesAllowed("ADMIN")
 @CssImport("./styles/my-grid-styles.css")
-@Route(value = "Zamówienia", layout = MainView.class)
+@Route(value = "Zamowienia", layout = MainView.class)
 @PageTitle("Zamówienia")
 public class Orders extends VerticalLayout {
 
@@ -43,12 +44,10 @@ public class Orders extends VerticalLayout {
     private List<Product> productList = new ArrayList<>();
 
     private final OrderService orderService;
-    private final ProductService productService;
     private final DataService dataService;
 
     public Orders(final OrderService orderService, final ProductService productService, final DataService dataService) {
         this.orderService = orderService;
-        this.productService = productService;
         this.dataService = dataService;
         status = new Span();
         configureComponents();
