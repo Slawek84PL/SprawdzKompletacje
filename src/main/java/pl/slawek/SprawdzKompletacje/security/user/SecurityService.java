@@ -19,8 +19,7 @@ public class SecurityService {
 
     public AppUser getAuthenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        AppUser user = (AppUser) authentication.getPrincipal();
-        return user;
+        return (AppUser) authentication.getPrincipal();
     }
 
     public boolean isAuthenticated() {

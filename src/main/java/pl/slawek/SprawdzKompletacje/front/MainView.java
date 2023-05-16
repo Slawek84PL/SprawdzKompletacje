@@ -17,8 +17,8 @@ import pl.slawek.SprawdzKompletacje.security.user.SecurityService;
 
 
 class MainView extends AppLayout {
-    private Button logout = new Button();
-    private HorizontalLayout header = new HorizontalLayout();
+    private final Button logout = new Button();
+    private final HorizontalLayout header = new HorizontalLayout();
 
     private final SecurityService securityService;
 
