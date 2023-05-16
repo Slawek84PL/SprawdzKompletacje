@@ -5,12 +5,10 @@ import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class SecurityService {
     private static final String LOGOUT_SUCCESS_PATH = "/";
     private final transient AuthenticationContext authenticationContext;
@@ -19,14 +17,10 @@ public class SecurityService {
         this.authenticationContext = authenticationContext;
     }
 
-    public UserDetails getAuthenticatedUser() {
+    public AppUser getAuthenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AppUser user = (AppUser) authentication.getPrincipal();
-        if (user != null) {
-            return user;
-        }
-
-        return null;
+        return user;
     }
 
     public boolean isAuthenticated() {
