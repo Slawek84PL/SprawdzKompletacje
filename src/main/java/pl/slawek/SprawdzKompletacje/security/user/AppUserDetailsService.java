@@ -13,12 +13,11 @@ class AppUserDetailsService implements UserDetailsService {
     @Autowired
     private AppUserRepository userRepo;
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser user = userRepo.findByUsername(username);
         if (user != null) {
-            return new AppUserDetails(user);
+            return user;
         }
         throw new UsernameNotFoundException("Nie znaleziono użytkownika " + username);
     }
