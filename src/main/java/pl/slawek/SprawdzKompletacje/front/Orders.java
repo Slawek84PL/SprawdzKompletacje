@@ -5,6 +5,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
@@ -46,7 +47,7 @@ public class Orders extends VerticalLayout {
     private final OrderService orderService;
     private final DataService dataService;
 
-    public Orders(final OrderService orderService, final ProductService productService, final DataService dataService) {
+    public Orders(final OrderService orderService, final DataService dataService) {
         this.orderService = orderService;
         this.dataService = dataService;
         status = new Span();
@@ -138,12 +139,13 @@ public class Orders extends VerticalLayout {
             fileSelector.focus();
         });
         productsGrid.setVisible(false);
-        productsGrid.addColumn(Product::getBarcode).setHeader("Kod produktu").setAutoWidth(true);
-        productsGrid.addColumn(Product::getName).setHeader("Nazwa produktu").setAutoWidth(true);
-        productsGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona").setAutoWidth(true);
-        productsGrid.addColumn(Product::getScannedQuantity).setHeader("Ilość zeskanowana").setAutoWidth(true);
+        productsGrid.addColumn(Product::getBarcode).setHeader("Kod produktu").setAutoWidth(true).setFlexGrow(0);
+        productsGrid.addColumn(Product::getName).setHeader("Nazwa produktu").setAutoWidth(true).setFlexGrow(0);
+        productsGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona").setAutoWidth(true).setFlexGrow(0);
+        productsGrid.addColumn(Product::getScannedQuantity).setHeader("Ilość zeskanowana").setAutoWidth(true).setFlexGrow(0);
         productsGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
         productsGrid.setEnabled(false);
+        productsGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS, GridVariant.LUMO_ROW_STRIPES, GridVariant.LUMO_COMPACT);
         productsGrid.setPartNameGenerator(product -> {
             if(product.getQuantity() == product.getScannedQuantity()){
                 return "green-background";

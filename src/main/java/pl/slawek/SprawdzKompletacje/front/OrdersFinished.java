@@ -59,9 +59,9 @@ class OrdersFinished extends Div {
     }
 
     private void configureOrderGrid() {
-        orderGrid.addColumn(OrderNumber::getFileName).setHeader("Numer Zamówienia");
-        orderGrid.addColumn(new LocalDateTimeRenderer<>(OrderNumber::getImportDate, "yyyy-MM-dd HH:mm")).setHeader("Data importu").setWidth("100px");
-        orderGrid.addColumn(new LocalDateTimeRenderer<>(OrderNumber::getFinishedDate, "yyyy-MM-dd HH:mm")).setHeader("Data zakończenia");
+        orderGrid.addColumn(OrderNumber::getFileName).setHeader("Numer Zamówienia").setAutoWidth(true).setFlexGrow(0);
+        orderGrid.addColumn(new LocalDateTimeRenderer<>(OrderNumber::getImportDate, "yyyy-MM-dd HH:mm")).setHeader("Data importu").setWidth("100px").setAutoWidth(true).setFlexGrow(0);
+        orderGrid.addColumn(new LocalDateTimeRenderer<>(OrderNumber::getFinishedDate, "yyyy-MM-dd HH:mm")).setHeader("Data zakończenia").setAutoWidth(true).setFlexGrow(0);
         orderGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
         formatMyGrid(orderGrid);
         orderGrid.setVisible(true);
@@ -75,10 +75,10 @@ class OrdersFinished extends Div {
     }
 
     private void configureProductGrid() {
-        productGrid.addColumn(Product::getName).setHeader("Nazwa productu");
-        productGrid.addColumn(Product::getBarcode).setHeader("Kod produktu");
-        productGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona");
-        productGrid.addColumn(Product::getScannedQuantity).setHeader("Ilość zeskanowana");
+        productGrid.addColumn(Product::getName).setHeader("Nazwa productu").setAutoWidth(true).setFlexGrow(0);
+        productGrid.addColumn(Product::getBarcode).setHeader("Kod produktu").setAutoWidth(true).setFlexGrow(0);
+        productGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona").setAutoWidth(true).setFlexGrow(0);
+        productGrid.addColumn(Product::getScannedQuantity).setHeader("Ilość zeskanowana").setAutoWidth(true).setFlexGrow(0);
         productGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
         formatMyGrid(productGrid);
         productGrid.addItemClickListener(e -> {
@@ -90,13 +90,13 @@ class OrdersFinished extends Div {
     private void configureDetailsGrid() {
         formatMyGrid(detailsGrid);
         detailsGrid.setSelectionMode(Grid.SelectionMode.NONE);
-        detailsGrid.addColumn(new LocalDateTimeRenderer<>(ScannedPosition::getScannedTime, "yyyy-MM-dd HH:mm")).setHeader("Data skanowania");
-        detailsGrid.addColumn(ScannedPosition::getScannedQuantity).setHeader("Ilość zatwierdzonych sztuk");
+        detailsGrid.addColumn(new LocalDateTimeRenderer<>(ScannedPosition::getScannedTime, "yyyy-MM-dd HH:mm")).setHeader("Data skanowania").setAutoWidth(true).setFlexGrow(0);
+        detailsGrid.addColumn(ScannedPosition::getScannedQuantity).setHeader("Ilość zatwierdzonych sztuk").setAutoWidth(true).setFlexGrow(0);
     }
 
     private void formatMyGrid(Grid grid) {
         grid.setVisible(false);
-        grid.addThemeVariants(GridVariant.LUMO_COMPACT);
+        grid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS, GridVariant.LUMO_ROW_STRIPES, GridVariant.LUMO_COMPACT);
     }
 
     private void addComponents() {
