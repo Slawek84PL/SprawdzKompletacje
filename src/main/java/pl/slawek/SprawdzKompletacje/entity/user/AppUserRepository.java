@@ -1,9 +1,9 @@
-package pl.slawek.SprawdzKompletacje.security.user;
+package pl.slawek.SprawdzKompletacje.entity.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import pl.slawek.SprawdzKompletacje.entity.user.AppUser;
 
-@Repository
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     AppUser findByUsername(String username);
 }

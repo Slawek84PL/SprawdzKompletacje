@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje.front;
+package pl.slawek.SprawdzKompletacje.front.user;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -10,8 +10,9 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.slawek.SprawdzKompletacje.security.user.AppUser;
-import pl.slawek.SprawdzKompletacje.security.user.AppUserService;
+import pl.slawek.SprawdzKompletacje.entity.user.AppUserService;
+import pl.slawek.SprawdzKompletacje.front.MainView;
+import pl.slawek.SprawdzKompletacje.entity.user.AppUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class UserManagerView extends VerticalLayout {
     }
 
     private void createGrid() {
-        usersGrid.addColumn(AppUser::getName).setHeader("Nazwa").setAutoWidth(true).setFlexGrow(0);
+        usersGrid.addColumn(AppUser::getFirsName).setHeader("Nazwa").setAutoWidth(true).setFlexGrow(0);
         usersGrid.addColumn(AppUser::getUsername).setHeader("Login").setAutoWidth(true).setFlexGrow(0);
         usersGrid.addColumn(AppUser::getRole).setHeader("Rola").setAutoWidth(true).setFlexGrow(0);
         usersGrid.addColumn(new LocalDateTimeRenderer<>(AppUser::getCreateUserDate, "yyyy-MM-dd HH:mm.ss")).setHeader("Data utworzenia").setAutoWidth(true).setFlexGrow(0);

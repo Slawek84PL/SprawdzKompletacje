@@ -1,6 +1,7 @@
-package pl.slawek.SprawdzKompletacje.security.user;
+package pl.slawek.SprawdzKompletacje.entity.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -26,9 +27,11 @@ public class AppUser implements UserDetails {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String username;
+    private String firsName;
 
-    private String name;
+    private String lastName;
+
+    private String username;
 
     private String password;
 

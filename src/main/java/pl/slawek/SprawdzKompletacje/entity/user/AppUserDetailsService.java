@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje.security.user;
+package pl.slawek.SprawdzKompletacje.entity.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
