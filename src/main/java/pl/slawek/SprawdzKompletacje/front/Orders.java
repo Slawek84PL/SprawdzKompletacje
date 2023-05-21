@@ -19,7 +19,6 @@ import jakarta.annotation.security.RolesAllowed;
 import pl.slawek.SprawdzKompletacje.entity.DataService;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
-import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
 
 import java.util.ArrayList;

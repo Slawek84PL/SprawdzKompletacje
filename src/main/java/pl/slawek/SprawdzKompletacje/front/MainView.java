@@ -13,10 +13,11 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLink;
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.slawek.SprawdzKompletacje.security.user.SecurityService;
+import pl.slawek.SprawdzKompletacje.front.user.UserManagerView;
+import pl.slawek.SprawdzKompletacje.security.SecurityService;
 
 
-class MainView extends AppLayout {
+public class MainView extends AppLayout {
     private final Button logout = new Button();
     private final HorizontalLayout header = new HorizontalLayout();
 
@@ -32,7 +33,7 @@ class MainView extends AppLayout {
     private void createLogout() {
         logout.addClickListener(event -> securityService.logout());
         if (securityService.isAuthenticated()) {
-            logout.setText("Wylogu się " + securityService.getAuthenticatedUser().getName());
+            logout.setText("Wylogu się " + securityService.getAuthenticatedUser().getFirsName());
             logout.setVisible(true);
         } else {
             logout.setVisible(false);

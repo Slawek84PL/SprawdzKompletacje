@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.slawek.SprawdzKompletacje.front.LoginView;
-import pl.slawek.SprawdzKompletacje.security.user.AppUserDetailsService;
+import pl.slawek.SprawdzKompletacje.entity.user.AppUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
