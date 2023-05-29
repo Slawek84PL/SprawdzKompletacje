@@ -1,7 +1,6 @@
 package pl.slawek.SprawdzKompletacje.entity.user;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -23,12 +22,14 @@ import java.util.List;
 public class AppUser implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(columnDefinition = "nvarchar(255)")
     private String firsName;
 
+    @Column(columnDefinition = "nvarchar(255)")
     private String lastName;
 
     private String username;
