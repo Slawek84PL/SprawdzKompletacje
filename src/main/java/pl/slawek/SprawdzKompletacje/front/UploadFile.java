@@ -35,7 +35,6 @@ class UploadFile extends VerticalLayout {
             try {
                 excelReaderToDB.readExcelFile(buffer.getFileData().getFile(), buffer.getFileName());
             } catch (IOException ignore) {
-                ignore.printStackTrace();
             }
 
         });
