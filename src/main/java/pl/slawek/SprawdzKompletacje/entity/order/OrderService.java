@@ -1,7 +1,6 @@
 package pl.slawek.SprawdzKompletacje.entity.order;
 
 import org.springframework.stereotype.Service;
-import pl.slawek.SprawdzKompletacje.entity.product.Product;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,13 +13,6 @@ public class OrderService {
     OrderService(final OrderRepository orderRepo) {
         this.orderRepo = orderRepo;
     }
-
-
-    public void addProductsToOrder(final OrderNumber orderNumber, List<Product> products) {
-        orderNumber.setProducts(products);
-        orderRepo.save(orderNumber);
-    }
-
 
     public List<OrderNumber> findAllActiveOrders() {
         return orderRepo.findByIsFinishedFalse();

@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.slawek.SprawdzKompletacje.entity.user.AppUser;
 
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
+    boolean existsByUsername(String username);
     AppUser findByUsername(String username);
 }

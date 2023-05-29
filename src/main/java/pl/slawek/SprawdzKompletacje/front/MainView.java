@@ -33,7 +33,7 @@ public class MainView extends AppLayout {
     private void createLogout() {
         logout.addClickListener(event -> securityService.logout());
         if (securityService.isAuthenticated()) {
-            logout.setText("Wylogu się " + securityService.getAuthenticatedUser().getFirsName());
+            logout.setText("Wyloguj się " + securityService.getAuthenticatedUser().getFirsName());
             logout.setVisible(true);
         } else {
             logout.setVisible(false);

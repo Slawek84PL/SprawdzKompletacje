@@ -24,7 +24,7 @@ public class UserManagerView extends VerticalLayout {
 
     @Autowired
     private final AppUserService appUserService;
-    private Grid<AppUser> usersGrid = new Grid<>(AppUser.class, false);
+    private final Grid<AppUser> usersGrid = new Grid<>(AppUser.class, false);
     private List<AppUser> appUserList = new ArrayList<>();
     private Button button;
 
@@ -51,7 +51,7 @@ public class UserManagerView extends VerticalLayout {
         usersGrid.addColumn(AppUser::getFirsName).setHeader("Nazwa").setAutoWidth(true).setFlexGrow(0);
         usersGrid.addColumn(AppUser::getUsername).setHeader("Login").setAutoWidth(true).setFlexGrow(0);
         usersGrid.addColumn(AppUser::getRole).setHeader("Rola").setAutoWidth(true).setFlexGrow(0);
-        usersGrid.addColumn(new LocalDateTimeRenderer<>(AppUser::getCreateUserDate, "yyyy-MM-dd HH:mm.ss")).setHeader("Data utworzenia").setAutoWidth(true).setFlexGrow(0);
+        usersGrid.addColumn(new LocalDateTimeRenderer<>(AppUser::getCreateUserDate, "yyyy-MM-dd HH:mm:ss")).setHeader("Data utworzenia").setAutoWidth(true).setFlexGrow(0);
         usersGrid.addColumn(AppUser::getPassword).setHeader("Hasło").setAutoWidth(true).setFlexGrow(0);
         usersGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS, GridVariant.LUMO_ROW_STRIPES, GridVariant.LUMO_COMPACT);
         usersGrid.setItems(appUserList);

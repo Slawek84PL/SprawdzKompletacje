@@ -1,7 +1,5 @@
 package pl.slawek.SprawdzKompletacje.entity.user;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,19 +10,28 @@ import java.util.List;
 public class AppUserService {
 
     @Autowired
-    private AppUserRepository appUserRepository;
+    private AppUserRepository repository;
 
     @Autowired
     private BCryptPasswordEncoder encoder;
 
     public List<AppUser> findAllAppUser() {
-        return appUserRepository.findAll();
+        return repository.findAll();
     }
 
     public void saveNewUser(AppUser user) {
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRole(Role.USER);
         user.setEnabled(true);
-        appUserRepository.save(user);
+        repository.save(user);
+    }
+
+    boolean existByUsername() {
+        return repository.existsByUsername("ADMIN");
+    }
+
+    void saveFirstAdmin(final AppUser user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        repository.save(user);
     }
 }

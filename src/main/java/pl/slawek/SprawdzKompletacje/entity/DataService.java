@@ -8,19 +8,23 @@ import pl.slawek.SprawdzKompletacje.entity.product.Product;
 import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
 import pl.slawek.SprawdzKompletacje.entity.product.scanned.ScannedPosition;
 import pl.slawek.SprawdzKompletacje.entity.product.scanned.ScannedPositionRepository;
+import pl.slawek.SprawdzKompletacje.security.SecurityService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class DataService {
     private final OrderService orderService;
     private final ProductService productService;
     private final ScannedPositionRepository positionRepository;
+    private final SecurityService securityService;
 
-    DataService(final OrderService orderService, final ProductService productService, final ScannedPositionRepository positionRepository) {
+    DataService(final OrderService orderService, final ProductService productService, final ScannedPositionRepository positionRepository, final SecurityService securityService) {
         this.orderService = orderService;
         this.productService = productService;
         this.positionRepository = positionRepository;
+        this.securityService = securityService;
     }
 
     @Transactional
@@ -33,6 +37,12 @@ public class DataService {
         scannedPosition.setProduct(product);
         orderService.save(orderNumber);
         positionRepository.save(scannedPosition);
+    }
+
+    public void addProductsToOrder(final OrderNumber orderNumber, List<Product> products) {
+        orderNumber.setImportUser(securityService.getAuthenticatedUser());
+        orderNumber.setProducts(products);
+        orderService.save(orderNumber);
     }
 
 }
