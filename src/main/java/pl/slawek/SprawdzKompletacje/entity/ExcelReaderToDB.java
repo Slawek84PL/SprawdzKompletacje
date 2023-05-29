@@ -5,9 +5,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
-import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
 import pl.slawek.SprawdzKompletacje.entity.product.Product;
-import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,8 +16,7 @@ import java.util.List;
 @Component
 public class ExcelReaderToDB {
 
-    private final OrderService orderService;
-    private final ProductService productService;
+    private final DataService dataService;
 
     @Transactional
     public void readExcelFile(File file, String fileName) throws IOException {
@@ -43,7 +40,8 @@ public class ExcelReaderToDB {
                 product.setOrderNumber(orderNumber);
                 products.add(product);
             }
-            orderService.addProductsToOrder(orderNumber, products);
+
+            dataService.addProductsToOrder(orderNumber, products);
         }
     }
 }
