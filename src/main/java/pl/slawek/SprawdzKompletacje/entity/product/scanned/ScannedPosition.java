@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "scanned_positions")
 public class ScannedPosition {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
