@@ -9,8 +9,8 @@ import com.vaadin.flow.data.binder.ValueContext;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.slawek.SprawdzKompletacje.entity.user.AppUser;
-import pl.slawek.SprawdzKompletacje.entity.user.AppUserService;
+import pl.slawek.SprawdzKompletacje.backend.entity.user.AppUser;
+import pl.slawek.SprawdzKompletacje.backend.entity.user.AppUserService;
 
 @Data
 @Component

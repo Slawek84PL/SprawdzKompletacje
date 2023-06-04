@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje.entity.product.scanned;
+package pl.slawek.SprawdzKompletacje.backend.entity.product.scanned;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

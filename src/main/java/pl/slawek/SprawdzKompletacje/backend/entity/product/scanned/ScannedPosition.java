@@ -1,8 +1,8 @@
-package pl.slawek.SprawdzKompletacje.entity.product.scanned;
+package pl.slawek.SprawdzKompletacje.backend.entity.product.scanned;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.slawek.SprawdzKompletacje.entity.product.Product;
+import pl.slawek.SprawdzKompletacje.backend.entity.product.Product;
 
 import java.time.LocalDateTime;
 

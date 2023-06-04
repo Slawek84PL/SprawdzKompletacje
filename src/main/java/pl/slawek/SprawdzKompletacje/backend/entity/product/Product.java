@@ -1,9 +1,9 @@
-package pl.slawek.SprawdzKompletacje.entity.product;
+package pl.slawek.SprawdzKompletacje.backend.entity.product;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
-import pl.slawek.SprawdzKompletacje.entity.product.scanned.ScannedPosition;
+import pl.slawek.SprawdzKompletacje.backend.entity.order.OrderNumber;
+import pl.slawek.SprawdzKompletacje.backend.entity.product.scanned.ScannedPosition;
 
 import java.util.ArrayList;
 import java.util.List;

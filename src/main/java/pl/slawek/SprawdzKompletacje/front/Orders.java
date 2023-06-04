@@ -1,11 +1,8 @@
 package pl.slawek.SprawdzKompletacje.front;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
@@ -16,10 +13,10 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
-import pl.slawek.SprawdzKompletacje.entity.DataService;
-import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
-import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
-import pl.slawek.SprawdzKompletacje.entity.product.Product;
+import pl.slawek.SprawdzKompletacje.backend.entity.DataService;
+import pl.slawek.SprawdzKompletacje.backend.entity.order.OrderNumber;
+import pl.slawek.SprawdzKompletacje.backend.entity.order.OrderService;
+import pl.slawek.SprawdzKompletacje.backend.entity.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;

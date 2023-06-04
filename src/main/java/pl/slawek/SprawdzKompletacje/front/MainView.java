@@ -15,7 +15,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLink;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.slawek.SprawdzKompletacje.front.user.UserManagerView;
-import pl.slawek.SprawdzKompletacje.security.SecurityService;
+import pl.slawek.SprawdzKompletacje.backend.security.SecurityService;
 
 @CssImport("./themes/mojeStyle/styles.css")
 public class MainView extends AppLayout {

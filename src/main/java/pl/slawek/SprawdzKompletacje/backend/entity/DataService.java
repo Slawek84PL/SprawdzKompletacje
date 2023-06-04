@@ -1,14 +1,14 @@
-package pl.slawek.SprawdzKompletacje.entity;
+package pl.slawek.SprawdzKompletacje.backend.entity;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
-import pl.slawek.SprawdzKompletacje.entity.order.OrderService;
-import pl.slawek.SprawdzKompletacje.entity.product.Product;
-import pl.slawek.SprawdzKompletacje.entity.product.ProductService;
-import pl.slawek.SprawdzKompletacje.entity.product.scanned.ScannedPosition;
-import pl.slawek.SprawdzKompletacje.entity.product.scanned.ScannedPositionRepository;
-import pl.slawek.SprawdzKompletacje.security.SecurityService;
+import pl.slawek.SprawdzKompletacje.backend.entity.order.OrderNumber;
+import pl.slawek.SprawdzKompletacje.backend.entity.order.OrderService;
+import pl.slawek.SprawdzKompletacje.backend.entity.product.Product;
+import pl.slawek.SprawdzKompletacje.backend.entity.product.ProductService;
+import pl.slawek.SprawdzKompletacje.backend.entity.product.scanned.ScannedPosition;
+import pl.slawek.SprawdzKompletacje.backend.entity.product.scanned.ScannedPositionRepository;
+import pl.slawek.SprawdzKompletacje.backend.security.SecurityService;
 
 import java.time.LocalDateTime;
 import java.util.List;

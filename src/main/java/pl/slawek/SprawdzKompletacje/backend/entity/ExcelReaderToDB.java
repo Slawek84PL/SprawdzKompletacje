@@ -1,11 +1,11 @@
-package pl.slawek.SprawdzKompletacje.entity;
+package pl.slawek.SprawdzKompletacje.backend.entity;
 
 import lombok.Data;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import pl.slawek.SprawdzKompletacje.entity.order.OrderNumber;
-import pl.slawek.SprawdzKompletacje.entity.product.Product;
+import pl.slawek.SprawdzKompletacje.backend.entity.order.OrderNumber;
+import pl.slawek.SprawdzKompletacje.backend.entity.product.Product;
 
 import java.io.File;
 import java.io.IOException;

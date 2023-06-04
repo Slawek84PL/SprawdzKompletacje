@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje.security;
+package pl.slawek.SprawdzKompletacje.backend.security;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Component;
-import pl.slawek.SprawdzKompletacje.entity.user.AppUser;
+import pl.slawek.SprawdzKompletacje.backend.entity.user.AppUser;
 
 @Component
 public class SecurityService {

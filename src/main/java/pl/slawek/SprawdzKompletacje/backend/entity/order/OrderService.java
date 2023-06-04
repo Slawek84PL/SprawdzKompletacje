@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje.entity.order;
+package pl.slawek.SprawdzKompletacje.backend.entity.order;
 
 import org.springframework.stereotype.Service;
 

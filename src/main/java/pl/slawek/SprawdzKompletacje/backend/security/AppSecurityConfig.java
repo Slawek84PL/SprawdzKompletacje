@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje.security;
+package pl.slawek.SprawdzKompletacje.backend.security;
 
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.slawek.SprawdzKompletacje.front.LoginView;
-import pl.slawek.SprawdzKompletacje.entity.user.AppUserDetailsService;
+import pl.slawek.SprawdzKompletacje.backend.entity.user.AppUserDetailsService;
 
 @Configuration
 @EnableWebSecurity

@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje.entity.order;
+package pl.slawek.SprawdzKompletacje.backend.entity.order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,6 @@
 package pl.slawek.SprawdzKompletacje.front.user;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.notification.Notification;
@@ -11,9 +10,9 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.slawek.SprawdzKompletacje.entity.user.AppUserService;
+import pl.slawek.SprawdzKompletacje.backend.entity.user.AppUserService;
 import pl.slawek.SprawdzKompletacje.front.MainView;
-import pl.slawek.SprawdzKompletacje.entity.user.AppUser;
+import pl.slawek.SprawdzKompletacje.backend.entity.user.AppUser;
 
 import java.util.ArrayList;
 import java.util.List;
