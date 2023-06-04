@@ -4,6 +4,8 @@ spring:
     url: jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;
     username: sa
     password: Password1
+  devtools:
+    add-properties: true
 
   jpa:
     properties:
@@ -15,7 +17,10 @@ spring:
     show-sql: true
 
 admin:
-  pass: password
+  pass: Pa$$wort
+
+vaadin:
+  productionMode: false
 
 
 #spring:
@@ -25,10 +30,6 @@ admin:
 #    username: sa
 #    password: password
 #
-#  h2:
-#    console:
-#      enabled: true
-#      path: /h2
 #
 #  jpa:
 #    database-platform: org.hibernate.dialect.H2Dialect
@@ -38,12 +39,6 @@ admin:
 #    properties:
 #      hibernate:
 #        format_sql: true
-
-
-
-#spring:
-#  devtools:
-#    add-properties: true
 
 #logging:
 #  level:

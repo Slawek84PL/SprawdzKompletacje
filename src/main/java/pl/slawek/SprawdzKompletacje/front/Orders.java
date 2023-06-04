@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RolesAllowed("ADMIN")
-@CssImport("./styles/my-grid-styles.css")
 @Route(value = "Zamowienia", layout = MainView.class)
 @PageTitle("Zamówienia")
 public class Orders extends VerticalLayout {
@@ -94,7 +93,7 @@ public class Orders extends VerticalLayout {
         });
 
         finishFileButton.setEnabled(true);
-        finishFileButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        finishFileButton.setClassName("error");
         finishFileButton.addClickListener(event -> {
             orderService.finishOrder(fileSelector.getValue().getFileName());
             finishDiv.setVisible(false);
@@ -138,13 +137,13 @@ public class Orders extends VerticalLayout {
             fileSelector.focus();
         });
         productsGrid.setVisible(false);
-        productsGrid.addColumn(Product::getBarcode).setHeader("Kod produktu").setAutoWidth(true).setFlexGrow(0);
-        productsGrid.addColumn(Product::getName).setHeader("Nazwa produktu").setAutoWidth(true).setFlexGrow(0);
-        productsGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona").setAutoWidth(true).setFlexGrow(0);
-        productsGrid.addColumn(Product::getScannedQuantity).setHeader("Ilość zeskanowana").setAutoWidth(true).setFlexGrow(0);
+        productsGrid.addColumn(Product::getBarcode).setHeader("Kod produktu").setAutoWidth(true).setFlexGrow(1);
+        productsGrid.addColumn(Product::getName).setHeader("Nazwa produktu").setAutoWidth(true).setFlexGrow(1);
+        productsGrid.addColumn(Product::getQuantity).setHeader("Ilość zamówiona").setAutoWidth(true).setFlexGrow(1);
+        productsGrid.addColumn(Product::getScannedQuantity).setHeader("Ilość zeskanowana").setAutoWidth(true).setFlexGrow(1);
         productsGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
         productsGrid.setEnabled(false);
-        productsGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS, GridVariant.LUMO_ROW_STRIPES, GridVariant.LUMO_COMPACT);
+//        productsGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS, GridVariant.LUMO_ROW_STRIPES, GridVariant.LUMO_COMPACT);
         productsGrid.setPartNameGenerator(product -> {
             if(product.getQuantity() == product.getScannedQuantity()){
                 return "green-background";

@@ -60,7 +60,6 @@ public class UserRegisterForm extends FormLayout {
                 new ResponsiveStep("490px", 2, ResponsiveStep.LabelsPosition.TOP));
 
         setColspan(title, 2);
-        setColspan(firsName, 2);
         setColspan(username, 2);
         setColspan(errorMessageFields, 2);
         setColspan(submitButton, 2);

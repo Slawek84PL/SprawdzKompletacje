@@ -3,6 +3,7 @@ package pl.slawek.SprawdzKompletacje.front;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
@@ -16,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.slawek.SprawdzKompletacje.front.user.UserManagerView;
 import pl.slawek.SprawdzKompletacje.security.SecurityService;
 
-
+@CssImport("./themes/mojeStyle/styles.css")
 public class MainView extends AppLayout {
     private final Button logout = new Button();
     private final HorizontalLayout header = new HorizontalLayout();

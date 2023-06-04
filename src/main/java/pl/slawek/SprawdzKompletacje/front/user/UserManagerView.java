@@ -1,6 +1,7 @@
 package pl.slawek.SprawdzKompletacje.front.user;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.notification.Notification;
@@ -48,11 +49,12 @@ public class UserManagerView extends VerticalLayout {
     }
 
     private void createGrid() {
-        usersGrid.addColumn(AppUser::getFirsName).setHeader("Nazwa").setAutoWidth(true).setFlexGrow(0);
-        usersGrid.addColumn(AppUser::getUsername).setHeader("Login").setAutoWidth(true).setFlexGrow(0);
-        usersGrid.addColumn(AppUser::getRole).setHeader("Rola").setAutoWidth(true).setFlexGrow(0);
-        usersGrid.addColumn(new LocalDateTimeRenderer<>(AppUser::getCreateUserDate, "yyyy-MM-dd HH:mm:ss")).setHeader("Data utworzenia").setAutoWidth(true).setFlexGrow(0);
-        usersGrid.addColumn(AppUser::getPassword).setHeader("Hasło").setAutoWidth(true).setFlexGrow(0);
+        usersGrid.addColumn(AppUser::getFirsName).setHeader("Nazwa");
+        usersGrid.addColumn(AppUser::getLastName).setHeader("Nazwisko");
+        usersGrid.addColumn(AppUser::getUsername).setHeader("Login");
+        usersGrid.addColumn(AppUser::getRole).setHeader("Rola");
+        usersGrid.addColumn(new LocalDateTimeRenderer<>(AppUser::getCreateUserDate, "yyyy-MM-dd HH:mm:ss")).setHeader("Data utworzenia");
+        usersGrid.addColumn(AppUser::getPassword).setHeader("Hasło");
         usersGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS, GridVariant.LUMO_ROW_STRIPES, GridVariant.LUMO_COMPACT);
         usersGrid.setItems(appUserList);
     }
