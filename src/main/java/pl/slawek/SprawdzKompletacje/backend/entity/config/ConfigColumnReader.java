@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Component
@@ -16,9 +16,9 @@ public class ConfigColumnReader {
 
     private DataFormatter dataFormatter =  new DataFormatter();
 
-    public Map readExcelFile(File file) throws IOException {
+    public List<ConfigHeaderHelper> readExcelFile(File file) throws IOException {
 
-        Map<Integer, String> configs = new HashMap<>();
+        List<ConfigHeaderHelper> configs = new ArrayList<>();
 
         try (Workbook workbook = WorkbookFactory.create(file)) {
 
@@ -27,7 +27,7 @@ public class ConfigColumnReader {
             Row hederRow = sheet.getRow(firstRow);
 
             for (Cell column : hederRow) {
-                configs.put(column.getColumnIndex(), dataFormatter.formatCellValue(column));
+                configs.add(new ConfigHeaderHelper(column.getColumnIndex(), dataFormatter.formatCellValue(column), false));
             }
         }
     return configs;
