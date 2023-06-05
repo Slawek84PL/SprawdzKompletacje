@@ -22,7 +22,7 @@ public class UploadFilesI18N extends UploadI18N {
                         .setUnknown("unknown remaining time"))
                 .setError(new Uploading.Error()
                         .setServerUnavailable("Plik został już załadowany")
-                        .setUnexpectedServerError("Plik został już załadowany")
+                        .setUnexpectedServerError("Nieoczekiwany błąd serwera")
                         .setForbidden("Przesyłąnie zabronione")));
         setUnits(new Units().setSize(Arrays.asList("B", "kB", "MB", "GB", "TB",
                 "PB", "EB", "ZB", "YB")));
