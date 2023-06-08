@@ -1,4 +1,4 @@
-package pl.slawek.SprawdzKompletacje.front;
+package pl.slawek.SprawdzKompletacje.front.upload;
 
 import com.vaadin.flow.component.upload.UploadI18N;
 

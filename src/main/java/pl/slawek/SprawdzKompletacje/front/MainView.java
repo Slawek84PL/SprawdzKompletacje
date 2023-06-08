@@ -14,6 +14,7 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLink;
 import org.springframework.beans.factory.annotation.Autowired;
+import pl.slawek.SprawdzKompletacje.front.upload.UploadFile;
 import pl.slawek.SprawdzKompletacje.front.user.UserManagerView;
 import pl.slawek.SprawdzKompletacje.backend.security.SecurityService;
 
