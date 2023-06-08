@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Entity
-class Config {
+public class Config {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,9 +16,9 @@ public class ConfigColumnReader {
 
     private DataFormatter dataFormatter =  new DataFormatter();
 
-    public List<ConfigHeaderHelper> readExcelFile(File file) throws IOException {
+    public List<Config> readExcelFile(File file) throws IOException {
 
-        List<ConfigHeaderHelper> configs = new ArrayList<>();
+        List<Config> configs = new ArrayList<>();
 
         try (Workbook workbook = WorkbookFactory.create(file)) {
 
@@ -27,7 +27,10 @@ public class ConfigColumnReader {
             Row hederRow = sheet.getRow(firstRow);
 
             for (Cell column : hederRow) {
-                configs.add(new ConfigHeaderHelper(column.getColumnIndex(), dataFormatter.formatCellValue(column), false));
+                Config config = new Config();
+                config.setColumnNumber(column.getColumnIndex());
+                config.setColumnNameHeader(dataFormatter.formatCellValue(column));
+                configs.add(config);
             }
         }
     return configs;
