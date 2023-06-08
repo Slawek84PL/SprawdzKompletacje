@@ -1,19 +1,15 @@
 package pl.slawek.SprawdzKompletacje.front.upload;
 
 import com.vaadin.flow.component.checkbox.Checkbox;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.FileBuffer;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
 import pl.slawek.SprawdzKompletacje.backend.entity.ExcelReaderToDB;
-import pl.slawek.SprawdzKompletacje.backend.entity.config.Config;
-import pl.slawek.SprawdzKompletacje.backend.entity.config.ConfigColumnReader;
 import pl.slawek.SprawdzKompletacje.front.MainView;
 
 import java.io.IOException;
-import java.util.List;
 
 @RolesAllowed({"ADMIN", "USER"})
 @Route(value = "Upload", layout = MainView.class)
@@ -23,24 +19,16 @@ class UploadFile extends VerticalLayout {
     private final UploadFilesI18N i18N = new UploadFilesI18N();
     private final FileBuffer buffer = new FileBuffer();
     private final ExcelReaderToDB excelReaderToDB;
-    private final ConfigColumnReader columnReader;
-
+    private ImportConfigView configView;
     private Checkbox config;
     private Upload upload;
-    private Grid<Config> configGrid = new Grid<>(Config.class, true);
-    private List<Config> headers;
 
-    public UploadFile(final ExcelReaderToDB excelReaderToDB, ConfigColumnReader columnReader) {
+
+    public UploadFile(final ExcelReaderToDB excelReaderToDB) {
         this.excelReaderToDB = excelReaderToDB;
-        this.columnReader = columnReader;
         createConfigCheckbox();
         createUpload();
         createView();
-    }
-
-    private void createGrid() {
-        configGrid.setItems(headers);
-        add(configGrid);
     }
 
     private void createUpload() {
@@ -57,8 +45,8 @@ class UploadFile extends VerticalLayout {
             try {
 
                 if (config.getValue()) {
-                    headers = columnReader.readExcelFile(buffer.getFileData().getFile());
-                    createGrid();
+                    configView = new ImportConfigView(buffer.getFileData().getFile());
+                    add(configView);
                 } else {
                     excelReaderToDB.readExcelFile(buffer.getFileData().getFile(), buffer.getFileName());
                 }

@@ -21,6 +21,8 @@ public class Config {
 
     private String columnNameHeader;
 
+    private String columnConfigHeader;
+
     private Date createDate;
 
     @OneToOne
