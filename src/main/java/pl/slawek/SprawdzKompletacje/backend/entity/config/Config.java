@@ -15,13 +15,13 @@ public class Config {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String viewName;
+    private String configName;
 
-    private int columnNumber;
+    private String barcodeColumn;
 
-    private String columnNameHeader;
+    private String nameColumn;
 
-    private String columnConfigHeader;
+    private int quantityColumn;
 
     private Date createDate;
 
