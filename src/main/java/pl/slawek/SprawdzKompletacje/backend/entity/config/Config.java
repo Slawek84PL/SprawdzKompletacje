@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import pl.slawek.SprawdzKompletacje.backend.entity.user.AppUser;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -21,10 +22,15 @@ public class Config {
 
     private String nameColumn;
 
-    private int quantityColumn;
+    private String quantityColumn;
 
-    private Date createDate;
+    private LocalDateTime createDate;
 
     @OneToOne
     private AppUser user;
+
+    @PostPersist
+    private void setCreateDate() {
+        this.createDate = LocalDateTime.now();
+    }
 }
