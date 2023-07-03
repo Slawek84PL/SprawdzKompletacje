@@ -1,6 +1,5 @@
 package pl.slawek.SprawdzKompletacje.front.upload;
 
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -28,9 +27,6 @@ class UploadFile extends VerticalLayout {
     private Checkbox configCheckbox;
     private Upload upload;
     private final DataService dataService;
-    private Button saveButton = new Button();
-
-
 
     public UploadFile(final ExcelReaderToDB excelReaderToDB, final DataService dataService) {
         this.excelReaderToDB = excelReaderToDB;

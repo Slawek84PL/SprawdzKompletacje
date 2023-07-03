@@ -15,4 +15,8 @@ public class ConfigService {
         repository.save(config);
 
     }
+
+    public boolean isExistConfigName(String configName) {
+        return repository.existsByConfigName(configName);
+    }
 }

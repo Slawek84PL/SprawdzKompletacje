@@ -58,4 +58,7 @@ public class DataService {
         configService.save(config);
     }
 
+    public boolean isExistConfigName(String configName) {
+        return configService.isExistConfigName(configName);
+    }
 }
