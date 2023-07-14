@@ -5,7 +5,6 @@ import lombok.Data;
 import pl.slawek.SprawdzKompletacje.backend.entity.user.AppUser;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @Entity
